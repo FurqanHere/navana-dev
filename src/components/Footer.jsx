@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.png";
-import autoLiftLogo from "../assets/images/AutoLift.png";
 import { Link, useLocation } from "react-router-dom";
 
-import googlePlay from "../assets/images/googleBtn.png";
-import applePlay from "../assets/images/appleBtn.png";
+// import googlePlay from "../assets/images/googleBtn.png";
+// import applePlay from "../assets/images/appleBtn.png";
 
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
@@ -40,7 +39,6 @@ const Footer = () => {
           <div className="col-md-4 col-sm-12 mb-4 mb-md-0" data-scroll-animation="fade-right" data-scroll-delay="100">
             <div className="d-flex flex-column align-items-center mb-3 footer-logo-wrapper">
               <img src={logo} alt="Logo" className="logo" />
-              <img src={autoLiftLogo} alt="AUTOLIFT" className="auto-lift-logo mt-1" />
             </div>
             <p className="text-white mb-4 footer-description-text">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
@@ -52,7 +50,7 @@ const Footer = () => {
                 // rel="noopener noreferrer"
               >
                 <img
-                  src={applePlay}
+                  // src={applePlay}
                   alt="Download on the App Store"
                   className="footer-app-store-image"
                 />
@@ -63,7 +61,7 @@ const Footer = () => {
                 // rel="noopener noreferrer"
               >
                 <img
-                  src={googlePlay}
+                  // src={googlePlay}
                   alt="Download from Google Play"
                   className="footer-app-store-image"
                 />
