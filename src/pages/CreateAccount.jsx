@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./CreateAccount.css";
 
 import backgroundImage from "../assets/images/login-bg.png";
@@ -7,12 +9,20 @@ import appleIcon from "../assets/images/apple.png";
 import uaeFlag from "../assets/images/flag.png";
 
 const CreateAccount = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+    });
+  }, []);
+
   return (
     <div
       className="create-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="create-card">
+      <div className="create-card" data-aos="fade-up" data-aos-delay="100">
         <div className="create-header">
           <h1>Create Account</h1>
           <p>Add information for account</p>

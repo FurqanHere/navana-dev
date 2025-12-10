@@ -24,7 +24,7 @@ const AppRouter = () => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/signup" element={<CreateAccount />} />
         </Routes>
       </Router>
     );

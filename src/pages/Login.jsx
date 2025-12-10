@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Login.css";
 
 import backgroundImage from "../assets/images/login-bg.png";
@@ -10,12 +12,20 @@ import appleIcon from "../assets/images/apple.png";
 const Login = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 50,
+    });
+  }, []);
+
   return (
     <div
       className="login-page"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="login-card">
+      <div className="login-card" data-aos="fade-up" data-aos-delay="100">
         <div className="login-header">
           <h1>Hello</h1>
           <p>Welcome Back!</p>

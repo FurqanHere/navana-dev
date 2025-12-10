@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import landingBg from "../assets/images/landingPageBg.png";
 import membershipImg from "../assets/images/membership-img.png";
 import orientationImg from "../assets/images/orientation-img.png";
@@ -66,6 +68,14 @@ const boats = [
 ];
 
 const HomePage = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100,
+    });
+  }, []);
+
   return (
     <div className="landing-page">
       <Header />
@@ -74,7 +84,7 @@ const HomePage = () => {
         style={{ backgroundImage: `url(${landingBg})` }}
       >
         <div className="landing-overlay mt-5">
-          <div className="landing-hero-content">
+          <div className="landing-hero-content" data-aos="fade-up" data-aos-delay="200">
             <p className="landing-kicker">
               Experience Nirvana Yachts &amp; Boats
             </p>
@@ -89,6 +99,8 @@ const HomePage = () => {
             key={service.title} 
             className="service-card"
             style={{ backgroundImage: `url(${service.bgImage})` }}
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
           >
             <div className="service-icon">
               <img src={service.image} alt={service.title} />
@@ -108,13 +120,18 @@ const HomePage = () => {
       <div className="services-spacer" />
 
       <section className="boats-section">
-        <div className="boats-header">
+        <div className="boats-header" data-aos="fade-up">
           <p className="boats-kicker">Boats &amp; Yachts</p>
           <h2 className="boats-heading">Top Luxurious Boat</h2>
         </div>
         <div className="boats-grid">
-          {boats.map((boat) => (
-            <div className="boat-card" key={boat.title}>
+          {boats.map((boat, index) => (
+            <div 
+              className="boat-card" 
+              key={boat.title}
+              data-aos="fade-up"
+              data-aos-delay={index * 150}
+            >
               <div
                 className="boat-card-image"
                 style={{ backgroundImage: `url(${boat.image})` }}
