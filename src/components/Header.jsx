@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import logo from "../assets/images/logo.png";
-// import autoLiftLogo from "../assets/images/AutoLift.png";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -35,48 +34,48 @@ export default function Navbar({ background = "" }) {
 
   return (
     <>
-      <nav className={`yacht-navbar ${background} ${isScrolled ? 'navbar-fixed' : ''}`}>
-        <div className="yacht-nav-container">
+      <nav className={`navbar-custom ${background} ${isScrolled ? 'navbar-fixed' : ''}`}>
+        <div className="navbar-container">
           {/* Left Navigation Links */}
-          <div className="yacht-nav-left">
-            {leftLinks.map((l, index) => (
+          <div className="navbar-left">
+            {leftLinks.map((link) => (
               <Link
-                key={l.path}
-                to={`/#${l.path}`}
-                className={`yacht-nav-segment ${
-                  activeLink === l.path ? "active" : ""
-                }`}
-                onClick={() => setActiveLink(l.path)}
+                key={link.path}
+                to={`/#${link.path}`}
+                className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                onClick={() => setActiveLink(link.path)}
               >
-                {l.name}
+                {link.name}
               </Link>
             ))}
           </div>
 
           {/* Center Logo */}
-          <Link className="yacht-nav-logo" to="/">
-            <img src={logo} alt="Nirvana Yachts & Boats" className="yacht-logo-img" />
+          <Link className="navbar-logo-container" to="/">
+            <img 
+              src={logo} 
+              alt="Nirvana Yachts & Boats" 
+              className="navbar-logo-img"
+            />
           </Link>
 
           {/* Right Navigation Links */}
-          <div className="yacht-nav-right">
-            {rightLinks.map((l, index) => (
+          <div className="navbar-right">
+            {rightLinks.map((link) => (
               <Link
-                key={l.path}
-                to={`/#${l.path}`}
-                className={`yacht-nav-segment ${
-                  activeLink === l.path ? "active" : ""
-                }`}
-                onClick={() => setActiveLink(l.path)}
+                key={link.path}
+                to={`/#${link.path}`}
+                className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                onClick={() => setActiveLink(link.path)}
               >
-                {l.name}
+                {link.name}
               </Link>
             ))}
           </div>
 
           {/* Mobile Toggle Button */}
           <button
-            className="yacht-nav-toggle d-lg-none"
+            className="navbar-toggle d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar"
@@ -89,7 +88,7 @@ export default function Navbar({ background = "" }) {
         </div>
       </nav>
 
-      {/* ───── OFF‑CANVAS (mobile only) ───── */}
+      {/* Mobile Off-canvas Menu */}
       <div
         className="offcanvas offcanvas-start d-lg-none"
         id="offcanvasNavbar"
@@ -109,50 +108,42 @@ export default function Navbar({ background = "" }) {
 
         <div className="offcanvas-body">
           <ul className="navbar-nav gap-3">
-            {[...leftLinks, ...rightLinks].map((l) => (
+            {[...leftLinks, ...rightLinks].map((link) => (
               <li
                 className="nav-item d-flex flex-column align-items-start"
-                key={l.path}
+                key={link.path}
               >
-                {l.type === "route" ? (
+                {link.type === "route" ? (
                   <Link
                     style={{ fontSize: "1.125rem" }}
-                    to={l.path}
+                    to={link.path}
                     className={`nav-link ${
-                      activeLink === l.path ? "active" : ""
+                      activeLink === link.path ? "active" : ""
                     }`}
-                    onClick={() => setActiveLink(l.path)}
+                    onClick={() => setActiveLink(link.path)}
                     data-bs-dismiss="offcanvas"
                   >
-                    {l.name}
+                    {link.name}
                   </Link>
                 ) : (
                   <ScrollLink
                     style={{ fontSize: "1.125rem" }}
-                    to={l.path}
+                    to={link.path}
                     smooth
                     duration={200}
                     spy
                     className={`nav-link ${
-                      activeLink === l.path ? "active" : ""
+                      activeLink === link.path ? "active" : ""
                     }`}
-                    onClick={() => setActiveLink(l.path)}
+                    onClick={() => setActiveLink(link.path)}
                     data-bs-dismiss="offcanvas"
                   >
-                    {l.name}
+                    {link.name}
                   </ScrollLink>
                 )}
-                
               </li>
             ))}
           </ul>
-          {/* <Link
-            className="btn partner-btn w-100 justify-content-center mt-4"
-            to="/become-a-partner"
-          >
-            <i className="fas fa-user-circle me-2"></i>
-            Become a Partner
-          </Link> */}
         </div>
       </div>
     </>

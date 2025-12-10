@@ -1,183 +1,84 @@
-import React, { useState } from "react";
-import logo from "../assets/images/logo.png";
-import { Link, useLocation } from "react-router-dom";
-
-// import googlePlay from "../assets/images/googleBtn.png";
-// import applePlay from "../assets/images/appleBtn.png";
-
-import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import React from "react";
+import footerImg from "../assets/images/footer-img.png";
+import callImg from "../assets/images/call-img.png";
+import fbIcon from "../assets/images/fb.png";
+import xIcon from "../assets/images/x.png";
+import instaIcon from "../assets/images/insta.png";
+import tiktokIcon from "../assets/images/tiktok.png";
+import whatsAppIcon from "../assets/images/whatsApp.png";
 
 const Footer = () => {
-  const location = useLocation();
-  const [email, setEmail] = useState("");
-
-  // Function to handle navigation to homepage sections
-  const handleSectionNavigation = (sectionId) => {
-    if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.location.href = `/#${sectionId}`;
-    }
-  };
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // Handle subscription logic here
-    console.log("Subscribed:", email);
-    setEmail("");
-  };
-
   return (
-    <div className="footer footer-main-container">
-      <div className="container pb-4">
-        <div className="row">
-          {/* Left Section*/}
-          <div className="col-md-4 col-sm-12 mb-4 mb-md-0" data-scroll-animation="fade-right" data-scroll-delay="100">
-            <div className="d-flex flex-column align-items-center mb-3 footer-logo-wrapper">
-              <img src={logo} alt="Logo" className="logo" />
-            </div>
-            <p className="text-white mb-4 footer-description-text">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-            </p>
-            <div className="d-flex flex-column flex-sm-row gap-2">
-              <a
-                // href="https://apps.apple.com/ae/app/gear-hire-car/id6747331842"
-                // target="_blank"
-                // rel="noopener noreferrer"
-              >
-                <img
-                  // src={applePlay}
-                  alt="Download on the App Store"
-                  className="footer-app-store-image"
-                />
-              </a>
-              <a
-                // href="https://play.google.com/store/apps/details?id=com.devicebee.gear"
-                // target="_blank"
-                // rel="noopener noreferrer"
-              >
-                <img
-                  // src={googlePlay}
-                  alt="Download from Google Play"
-                  className="footer-app-store-image"
-                />
-              </a>
-            </div>
-            </div>
+    <section
+      className="cta-footer"
+      style={{
+        // backgroundImage: `url(${footerImg})`,
+        backgroundColor: `black`,
+        backgroundBlendMode: "overlay, normal",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="cta-footer-grid">
+        <div className="cta-column">
+          <h4>Help Desk</h4>
+          <p className="cta-copy">
+            Do you have questions or want more information? Call now.
+          </p>
+          <a className="cta-phone" href="tel:+971542631798">
+            <img src={ callImg } className="call-img" alt="" /> +971 54 263 1798
+          </a>
+        </div>
 
-          {/* Middle Sections */}
-          <div className="col-md-4 col-sm-12 mb-4 mb-md-0" data-scroll-animation="fade-up" data-scroll-delay="200">
-            <div className="row">
-              <div className="col-6">
-                <h5 className="text-white fw-bold mb-3">Top Links</h5>
-                <nav className="nav flex-column">
-                  <button 
-                    className="nav-link text-white p-0 mb-2 btn btn-link text-start footer-nav-button"
-                    onClick={() => handleSectionNavigation('home')}
-                  >
-                    Home
-                  </button>
-                  <button 
-                    className="nav-link text-white p-0 mb-2 btn btn-link text-start footer-nav-button"
-                    onClick={() => handleSectionNavigation('aboutus')}
-                  >
-                    About Us
-                  </button>
-                  <button 
-                    className="nav-link text-white p-0 mb-2 btn btn-link text-start footer-nav-button"
-                    onClick={() => handleSectionNavigation('features')}
-                  >
-                    How It Works
-                  </button>
-                  <button 
-                    className="nav-link text-white p-0 mb-2 btn btn-link text-start footer-nav-button"
-                    onClick={() => handleSectionNavigation('screenshot')}
-                  >
-                    App Screenshots
-                  </button>
-                  <button 
-                    className="nav-link text-white p-0 mb-2 btn btn-link text-start footer-nav-button"
-                    onClick={() => handleSectionNavigation('downloadApp')}
-                  >
-                    Download App
-                  </button>
-                  <Link to="/Contact-us" className="nav-link text-white p-0 mb-2 footer-nav-link">
-                    Contact Us
-                  </Link>
-                </nav>
-              </div>
-              <div className="col-6">
-                <h5 className="text-white fw-bold mb-3">Our Terms</h5>
-                <nav className="nav flex-column">
-                  <Link to="/privacy" className="nav-link text-white p-0 mb-2 footer-nav-link">
-                    Privacy policy
-                  </Link>
-                  <Link to="/terms" className="nav-link text-white p-0 mb-2 footer-nav-link">
-                    Terms & Conditions
-                  </Link>
-                </nav>
+        <div className="cta-column links">
+          <div>
+            <a href="/">Home</a>
+            <a href="/#aboutus">About Us</a>
+            <a href="/#features">Boats</a>
+            <a href="/#membership">Memberships</a>
+            <a href="/#location">Locations</a>
+            <a href="/#contacts">Contact Us</a>
+          </div>
+        </div>
+
+        <div className="cta-column links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms &amp; Conditions</a>
+          <a href="/support">Support</a>
+          <a href="/download">Download App</a>
+        </div>
+
+        <div className="cta-column newsletter">
+          <h4>Sign up for newsletter and <br className="" /> get latest news &amp; update</h4>
+          <div className="newsletter-row">
+            <input type="email" placeholder="Your Email" />
+            <button type="button">Subscribe</button>
           </div>
         </div>
       </div>
 
-          {/* Right Section - Stay Up To Date */}
-          <div className="col-md-4 col-sm-12" data-scroll-animation="fade-left" data-scroll-delay="300">
-            <h5 className="text-white fw-bold mb-3">Stay Up To Date</h5>
-            <p className="text-white mb-3 footer-description-text">
-              Get updates about new features, job trends, and early access offers from Shiftly.
-            </p>
-            <p className="text-white mb-3 footer-email-text fw-bold">
-              <a 
-              // href="mailto:contact@shiftly.ae"
-               className="text-white text-decoration-none">
-                contact@shiftly.ae
-              </a>
-            </p>
-          </div>
+      <div className="cta-footer-bottom">
+        <span className="copyright-text" >Copyright © {new Date().getFullYear()} Nirvana. All rights reserved.</span>
+        <div className="social-row">
+          <a href="https://facebook.com" aria-label="Facebook">
+            <img src={fbIcon} className="fb" alt="Facebook" />
+          </a>
+          <a href="https://x.com" aria-label="X">
+            <img src={xIcon} className="x" alt="X" />
+          </a>
+          <a href="https://x.com" aria-label="X">
+            <img src={whatsAppIcon} className="whatsApp" alt="X" />
+          </a>
+          <a href="https://instagram.com" aria-label="Instagram">
+            <img src={instaIcon} className="insta" alt="Instagram" />
+          </a>
+          <a href="https://tiktok.com" aria-label="TikTok">
+            <img src={tiktokIcon} className="tiktok" alt="TikTok" />
+          </a>
         </div>
       </div>
-
-      {/* Footer Bottom Bar with Copyright */}
-      <div className="footer-bottom-bar">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-md-6 col-12 text-center text-md-start mb-2 mb-md-0">
-              <p className="footer-copyright-text mb-0">
-                © {new Date().getFullYear()} Autolift. All rights reserved.
-              </p>
-            </div>
-            <div className="col-md-6 col-12 text-center text-md-end">
-              <ul className="footer-icons list-unstyled mb-0 d-flex justify-content-center justify-content-md-end gap-3">
-                <li>
-                  <a href="#" aria-label="Facebook" className="text-white">
-                    <FaFacebook />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-label="Instagram" className="text-white">
-                    <FaInstagram />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-label="Twitter" className="text-white">
-                    <FaXTwitter />
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-label="YouTube" className="text-white">
-                    <FaYoutube />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
