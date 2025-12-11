@@ -9,6 +9,7 @@ import ContactUs from "../pages/ContactUs";
 import Become_a_Partner from "../pages/Become-a-Partner";
 import Login from "../pages/Login";
 import CreateAccount from "../pages/CreateAccount";
+import Membership from "../pages/Membership";
 
 const AppRouter = () => {
     const basePath = process.env.REACT_APP_BASE_PATH;
@@ -25,6 +26,7 @@ const AppRouter = () => {
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<CreateAccount />} />
+          <Route path="/membership" element={<Membership />} />
         </Routes>
       </Router>
     );

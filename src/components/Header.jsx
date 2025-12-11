@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import logo from "../assets/images/logo.png";
 
@@ -13,14 +13,26 @@ const leftLinks = [
 ];
 
 const rightLinks = [
-  { name: "Membership", path: "membership", type: "section" },
+  { name: "Membership", path: "/membership", type: "route" },
   { name: "Location", path: "location", type: "section" },
   { name: "Contacts", path: "contacts", type: "section" },
 ];
 
 export default function Navbar({ background = "" }) {
+  const location = useLocation();
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    // Set active link based on current route
+    if (location.pathname === "/membership") {
+      setActiveLink("/membership");
+    } else if (location.pathname === "/") {
+      setActiveLink("home");
+    } else {
+      setActiveLink(location.pathname);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,14 +51,25 @@ export default function Navbar({ background = "" }) {
           {/* Left Navigation Links */}
           <div className="navbar-left">
             {leftLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={`/#${link.path}`}
-                className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                onClick={() => setActiveLink(link.path)}
-              >
-                {link.name}
-              </Link>
+              link.type === "route" ? (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                  onClick={() => setActiveLink(link.path)}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={`/#${link.path}`}
+                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                  onClick={() => setActiveLink(link.path)}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -62,14 +85,25 @@ export default function Navbar({ background = "" }) {
           {/* Right Navigation Links */}
           <div className="navbar-right">
             {rightLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={`/#${link.path}`}
-                className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                onClick={() => setActiveLink(link.path)}
-              >
-                {link.name}
-              </Link>
+              link.type === "route" ? (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                  onClick={() => setActiveLink(link.path)}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <Link
+                  key={link.path}
+                  to={`/#${link.path}`}
+                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                  onClick={() => setActiveLink(link.path)}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
