@@ -21,9 +21,29 @@ import uploadImg from "../assets/images/upload.png";
 import personImg from "../assets/images/person-img.png";
 import cameraImg from "../assets/images/camera-img.png";
 import boatDetailBg from "../assets/images/boat3.png";
+import boatCard1 from "../assets/images/boat1.png";
+import boatCard2 from "../assets/images/boat2.png";
+import boatCard3 from "../assets/images/boat3.png";
 import lengthImg from "../assets/images/length.png";
 import bedImg from "../assets/images/bed.png";
 import personIcon from "../assets/images/person.png";
+import engineImg from "../assets/images/engine.png";
+import powerImg from "../assets/images/power-fan.png";
+import passengerImg from "../assets/images/passenger.png";
+import calendarImg from "../assets/images/calender-date.png";
+import clockImg from "../assets/images/date.png";
+import qrCodeImg from "../assets/images/qr-code-scan.png";
+import yartShipImg from "../assets/images/yart-img.png";
+import bdShipImg from "../assets/images/bs-ship.png";
+import profilePic from "../assets/images/profile-pic.png";
+import yellowStar from "../assets/images/yellowStar.png";
+import whiteStar from "../assets/images/whiteStar.png";
+import blueShip from "../assets/images/blue-ship.png";
+import experiences from "../assets/images/experiences.png";
+import bookingShips from "../assets/images/bookingShips.png";
+import whiteBlueShip from "../assets/images/white-blue-ship.png";
+import blueThumbsUp from "../assets/images/blueThumbsUp.png";
+import whiteTransparentTick from "../assets/images/whiteTransparentTick-img.png";
 
 // Fix for default marker icon in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -35,7 +55,8 @@ L.Icon.Default.mergeOptions({
 
 // Create custom red marker icon
 const redIcon = new L.Icon({
-  iconUrl: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAzMiA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDBDMTEuNTgyIDAgOCAzLjU4MiA4IDhDOCAxMy4zMzMgMTYgMjYgMTYgMjZDMTYgMjYgMjQgMTMuMzMzIDI0IDhDMjQgMy41ODIgMjAuNDE4IDAgMTYgMFoiIGZpbGw9IiNGRjAwMDAiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSI0IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=",
+  iconUrl:
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAzMiA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDBDMTEuNTgyIDAgOCAzLjU4MiA4IDhDOCAxMy4zMzMgMTYgMjYgMTYgMjZDMTYgMjYgMjQgMTMuMzMzIDI0IDhDMjQgMy41ODIgMjAuNDE4IDAgMTYgMFoiIGZpbGw9IiNGRjAwMDAiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSI0IiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=",
   iconSize: [32, 40],
   iconAnchor: [16, 40],
   popupAnchor: [0, -40],
@@ -89,6 +110,27 @@ const membershipPackages = [
   },
 ];
 
+const boatsData = [
+  {
+    title: "Calma Suite 1",
+    engine: "Engine: Twin Mercury V1",
+    length: "Length:16m",
+    image: boatCard1,
+  },
+  {
+    title: "TENDER 9 (T9)",
+    engine: "Twin Mercury Verado V6 (2 x 225 hp)",
+    length: "Length:16m",
+    image: boatCard2,
+  },
+  {
+    title: "Calma Suite 3",
+    engine: "Engine: Twin Mercury V1",
+    length: "Length:16m",
+    image: boatCard3,
+  },
+];
+
 const Membership = () => {
   const [currentView, setCurrentView] = useState("packages");
   const [selectedPackage, setSelectedPackage] = useState("SEALUX");
@@ -103,6 +145,9 @@ const Membership = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("online");
   const [selectedDocType, setSelectedDocType] = useState("emiratesId");
   const [bookingTab, setBookingTab] = useState("upcoming");
+  const [selectedBookingType, setSelectedBookingType] = useState("bookings");
+  const [selectedMarina, setSelectedMarina] = useState("");
+  const [showBookingSuccess, setShowBookingSuccess] = useState(false);
   const detailsData = {
     fullName: "",
     phone: "",
@@ -122,7 +167,7 @@ const Membership = () => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }, [currentView]);
 
@@ -146,16 +191,31 @@ const Membership = () => {
         className="membership-packages-section"
         style={{ backgroundImage: `url(${membershipBgImg})` }}
       >
-        {currentView !== "schedule" && currentView !== "details" && currentView !== "cardInfo" && currentView !== "documentUpload" && currentView !== "detailPage" && currentView !== "bookingManagement" && (
-          <div className="membership-hero-content" data-aos="fade-up">
-            <p className="membership-kicker">Membership</p>
-            <h1 className="membership-heading">
-              {currentView === "packages"
-                ? "Select Best Package"
-                : "Select Payment Options"}
-            </h1>
-          </div>
-        )}
+        {currentView !== "schedule" &&
+          currentView !== "details" &&
+          currentView !== "cardInfo" &&
+          currentView !== "documentUpload" &&
+          currentView !== "detailPage" &&
+          currentView !== "bookingManagement" &&
+          currentView !== "bookingDetail" &&
+          currentView !== "userProfile" &&
+          currentView !== "profileDetails" &&
+          currentView !== "editProfile" &&
+          currentView !== "feedback" &&
+          currentView !== "notifications" &&
+          currentView !== "bookingsHome" &&
+          currentView !== "experiencesHome" &&
+          currentView !== "bookingRequest" &&
+          currentView !== "experienceDetail" && (
+            <div className="membership-hero-content" data-aos="fade-up">
+              <p className="membership-kicker">Membership</p>
+              <h1 className="membership-heading">
+                {currentView === "packages"
+                  ? "Select Best Package"
+                  : "Select Payment Options"}
+              </h1>
+            </div>
+          )}
         <div className="membership-packages-container">
           {currentView === "packages" ? (
             <>
@@ -172,8 +232,8 @@ const Membership = () => {
                     </div>
                     <h3 className="membership-card-title">{pkg.name}</h3>
                     <div className="membership-card-price">
-                      {pkg.price}{" "}
-                      <span className="duration-text">{pkg.duration}</span>{" "}
+                      {pkg.price}
+                      <span className="duration-text">{pkg.duration}</span>
                     </div>
                     <ul className="membership-card-benefits">
                       {pkg.benefits.map((benefit, idx) => (
@@ -221,8 +281,7 @@ const Membership = () => {
                 <div className="schedule-card">
                   <div className="schedule-card-header">
                     <span role="img" aria-label="calendar">
-                      {" "}
-                      <i className="bi bi-calendar-month"></i>{" "}
+                      <i className="bi bi-calendar-month"></i>
                     </span>
                     <span>Select date of briefing</span>
                   </div>
@@ -394,7 +453,9 @@ const Membership = () => {
                   <div className="final-card secondary">
                     <div className="final-secondary-top">
                       <span className="final-term">Monthly</span>
-                      <span className="final-secondary-price">AED 2,500/mo</span>
+                      <span className="final-secondary-price">
+                        AED 2,500/mo
+                      </span>
                     </div>
                     <p className="final-secondary-sub">
                       Package price × 12 (paid monthly)
@@ -464,19 +525,39 @@ const Membership = () => {
                         placeholder="AXHUY2"
                         defaultValue="AXHUY2"
                       />
-                      <button type="button" className="promo-apply">Apply</button>
+                      <button type="button" className="promo-apply">
+                        Apply
+                      </button>
                     </div>
                   </div>
 
                   <div className="payment-method-block">
                     <p className="payment-label">Select a payment method</p>
-                    <div 
-                      className={`pay-option ${selectedPaymentMethod === "online" ? "pay-selected" : ""}`}
+                    <div
+                      className={`pay-option ${
+                        selectedPaymentMethod === "online" ? "pay-selected" : ""
+                      }`}
                       onClick={() => setSelectedPaymentMethod("online")}
                     >
-                      <div className={`pay-radio ${selectedPaymentMethod !== "online" ? "pay-off" : ""}`}>
-                        <svg className="pay-radio-check" width="12" height="9" viewBox="0 0 12 9" fill="none">
-                          <path d="M1 4.5L4.5 8L11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <div
+                        className={`pay-radio ${
+                          selectedPaymentMethod !== "online" ? "pay-off" : ""
+                        }`}
+                      >
+                        <svg
+                          className="pay-radio-check"
+                          width="12"
+                          height="9"
+                          viewBox="0 0 12 9"
+                          fill="none"
+                        >
+                          <path
+                            d="M1 4.5L4.5 8L11 1"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                       <span className="pay-label">Pay Online</span>
@@ -491,17 +572,35 @@ const Membership = () => {
 
                   <div className="payment-method-block">
                     <p className="payment-label">Select a payment method</p>
-                    <div 
-                      className={`pay-option ${selectedPaymentMethod === "cash" ? "pay-selected" : ""}`}
+                    <div
+                      className={`pay-option ${
+                        selectedPaymentMethod === "cash" ? "pay-selected" : ""
+                      }`}
                       onClick={() => setSelectedPaymentMethod("cash")}
                     >
-                      <div className={`pay-radio ${selectedPaymentMethod !== "cash" ? "pay-off" : ""}`}>
-                        <svg className="pay-radio-check" width="12" height="9" viewBox="0 0 12 9" fill="none">
-                          <path d="M1 4.5L4.5 8L11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <div
+                        className={`pay-radio ${
+                          selectedPaymentMethod !== "cash" ? "pay-off" : ""
+                        }`}
+                      >
+                        <svg
+                          className="pay-radio-check"
+                          width="12"
+                          height="9"
+                          viewBox="0 0 12 9"
+                          fill="none"
+                        >
+                          <path
+                            d="M1 4.5L4.5 8L11 1"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                       <span className="pay-label">
-                        Cash / Cheques / Card{" "}
+                        Cash / Cheques / Card
                         <span className="pay-sub">(at office)</span>
                       </span>
                     </div>
@@ -556,15 +655,23 @@ const Membership = () => {
             </div>
           ) : currentView === "documentUpload" ? (
             <div className="document-upload-view">
-              <h2 className="document-upload-title text-white">Document Upload</h2>
+              <h2 className="document-upload-title text-white">
+                Document Upload
+              </h2>
               <div className="document-upload-card">
-                
-                
                 {/* Profile Image Upload */}
                 <div className="profile-upload-section">
                   <div className="profile-upload-icon">
-                    <img src={personImg} alt="Person" className="profile-person-img" />
-                    <img src={cameraImg} alt="Camera" className="profile-camera-img" />
+                    <img
+                      src={personImg}
+                      alt="Person"
+                      className="profile-person-img"
+                    />
+                    <img
+                      src={cameraImg}
+                      alt="Camera"
+                      className="profile-camera-img"
+                    />
                   </div>
                   <p className="profile-upload-text">Upload Profile Image</p>
                 </div>
@@ -572,9 +679,9 @@ const Membership = () => {
                 {/* Document Type Selection */}
                 <div className="doc-radio-row">
                   <label className="doc-radio-label">
-                    <input 
-                      type="radio" 
-                      name="docType" 
+                    <input
+                      type="radio"
+                      name="docType"
                       checked={selectedDocType === "emiratesId"}
                       onChange={() => setSelectedDocType("emiratesId")}
                     />
@@ -582,8 +689,8 @@ const Membership = () => {
                     <span className="doc-radio-text">Emirates ID</span>
                   </label>
                   <label className="doc-radio-label">
-                    <input 
-                      type="radio" 
+                    <input
+                      type="radio"
                       name="docType"
                       checked={selectedDocType === "passport"}
                       onChange={() => setSelectedDocType("passport")}
@@ -616,47 +723,47 @@ const Membership = () => {
                   <div className="doc-license-section shadow p-4">
                     <h3 className="doc-section-title">Boat License</h3>
                     <div className="doc-upload-placeholder">
-                      <img src={uploadImg} alt="Upload" className="doc-upload-icon" />
+                      <img
+                        src={uploadImg}
+                        alt="Upload"
+                        className="doc-upload-icon"
+                      />
                       <p className="doc-upload-text">Upload License</p>
                     </div>
                   </div>
                 </div>
-
-                
               </div>
-                {/* Submit / Detail Buttons */}
-                <div className="doc-submit-container">
-                  <div className="doc-submit-actions">
-                    <button
-                      type="button"
-                      className="doc-submit-btn outline"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setCurrentView("detailPage");
-                      }}
-                    >
-                      Detail
-                    </button>
-                    <button
-                      type="button"
-                      className="doc-submit-btn"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setShowUploadSuccess(true);
-                      }}
-                    >
-                      Submit
-                    </button>
-                  </div>
+              {/* Submit / Detail Buttons */}
+              <div className="doc-submit-container">
+                <div className="doc-submit-actions">
+                  <button
+                    type="button"
+                    className="doc-submit-btn outline"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setCurrentView("detailPage");
+                    }}
+                  >
+                    Detail
+                  </button>
+                  <button
+                    type="button"
+                    className="doc-submit-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setShowUploadSuccess(true);
+                    }}
+                  >
+                    Submit
+                  </button>
                 </div>
+              </div>
             </div>
           ) : currentView === "detailPage" ? (
             <div className="detail-view">
-              <div
-                className="detail-hero"
-              >
+              <div className="detail-hero">
                 <div className="detail-hero-overlay" />
               </div>
 
@@ -664,7 +771,9 @@ const Membership = () => {
                 <div className="detail-header">
                   <div>
                     <p className="detail-kicker">TENDER 9 (T9)</p>
-                    <p className="detail-subtitle">Twin Mercury Verado V6 (2 x 225 hp)</p>
+                    <p className="detail-subtitle">
+                      Twin Mercury Verado V6 (2 x 225 hp)
+                    </p>
                   </div>
                   <div className="detail-specs">
                     {[
@@ -681,16 +790,20 @@ const Membership = () => {
                 </div>
 
                 <p className="detail-description">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                  laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                  architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                  sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                  voluptatem sequi nesciunt.
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque laudantium, totam rem aperiam, eaque
+                  ipsa quae ab illo inventore veritatis et quasi architecto
+                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                  consequuntur magni dolores eos qui ratione voluptatem sequi
+                  nesciunt.
                 </p>
 
                 <div className="detail-form">
                   <div className="detail-row date-time-row">
-                    <label className="detail-section-label">Select date &amp; Time</label>
+                    <label className="detail-section-label">
+                      Select date &amp; Time
+                    </label>
                     <div className="detail-date-time-fields">
                       <input placeholder="Date" className="detail-input" />
                       <input placeholder="Time" className="detail-input" />
@@ -711,28 +824,51 @@ const Membership = () => {
                   <div className="detail-row two">
                     <div className="detail-field">
                       <label className="detail-field-label">Add Location</label>
-                      <input placeholder="Enter location" className="detail-input" />
+                      <input
+                        placeholder="Enter location"
+                        className="detail-input"
+                      />
                     </div>
                     <div className="detail-field">
-                      <label className="detail-field-label">In-House Captain</label>
-                      <input placeholder="Select Captain" className="detail-input" />
+                      <label className="detail-field-label">
+                        In-House Captain
+                      </label>
+                      <input
+                        placeholder="Select Captain"
+                        className="detail-input"
+                      />
                     </div>
                   </div>
 
                   <div className="detail-row options">
                     <div className="detail-options-card">
-                      <label className="detail-options-title">Select date &amp; Time</label>
+                      <label className="detail-options-title">
+                        Select date &amp; Time
+                      </label>
                       <div className="detail-radio-group">
                         <label className="detail-radio-label">
-                          <input type="radio" name="captain" defaultChecked className="detail-radio" />
+                          <input
+                            type="radio"
+                            name="captain"
+                            defaultChecked
+                            className="detail-radio"
+                          />
                           <span>In-House Captain</span>
                         </label>
                         <label className="detail-radio-label">
-                          <input type="radio" name="captain" className="detail-radio" />
+                          <input
+                            type="radio"
+                            name="captain"
+                            className="detail-radio"
+                          />
                           <span>Camping</span>
                         </label>
                         <label className="detail-radio-label">
-                          <input type="radio" name="captain" className="detail-radio" />
+                          <input
+                            type="radio"
+                            name="captain"
+                            className="detail-radio"
+                          />
                           <span>Late Arrival</span>
                         </label>
                       </div>
@@ -741,7 +877,11 @@ const Membership = () => {
                       <MapContainer
                         center={[25.2048, 55.2708]}
                         zoom={13}
-                        style={{ height: "100%", width: "100%", borderRadius: "12px" }}
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "12px",
+                        }}
                         zoomControl={false}
                       >
                         <TileLayer
@@ -770,19 +910,23 @@ const Membership = () => {
           ) : currentView === "bookingManagement" ? (
             <div className="booking-management-view">
               <h2 className="booking-management-title">Booking Management</h2>
-              
+
               <div className="booking-management-header">
                 <div className="booking-tabs">
                   <button
                     type="button"
-                    className={`booking-tab ${bookingTab === "upcoming" ? "active" : ""}`}
+                    className={`booking-tab ${
+                      bookingTab === "upcoming" ? "active" : ""
+                    }`}
                     onClick={() => setBookingTab("upcoming")}
                   >
                     Upcoming Booking
                   </button>
                   <button
                     type="button"
-                    className={`booking-tab ${bookingTab === "previous" ? "active" : ""}`}
+                    className={`booking-tab ${
+                      bookingTab === "previous" ? "active" : ""
+                    }`}
                     onClick={() => setBookingTab("previous")}
                   >
                     Previous Trip
@@ -795,24 +939,775 @@ const Membership = () => {
                     className="booking-search-input"
                   />
                   <span className="booking-search-icon">
-                  <i class="bi bi-search"></i>
+                    <i class="bi bi-search"></i>
                   </span>
                 </div>
               </div>
 
               <div className="booking-cards-grid">
                 {[...Array(8)].map((_, index) => (
-                  <div key={index} className="booking-card">
+                  <div
+                    key={index}
+                    className="booking-card"
+                    onClick={() => setCurrentView("bookingDetail")}
+                  >
                     <div className="booking-card-image">
                       <img src={boatDetailBg} alt="Boat" />
                     </div>
                     <div className="booking-card-content">
-                      <h3 className="booking-card-title">Calma Suite 1</h3>
+                      <h3 className="booking-card-titl3265e">Calma Suite 1</h3>
                       <p className="booking-card-ref">Ref #:3265</p>
-                      <p className="booking-card-date">Dec 31, 2025 - 10 AM - 12 PM</p>
+                      <p className="booking-card-date">
+                        Dec 31, 2025 - 10 AM - 12 PM
+                      </p>
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          ) : currentView === "bookingDetail" ? (
+            <div className="booking-detail-view">
+              <h2 className="booking-detail-title">Booking Detail</h2>
+
+              <div className="booking-detail-image-card">
+                <img
+                  src={bdShipImg}
+                  alt="Boat"
+                  className="booking-detail-image"
+                />
+              </div>
+
+              <div className="booking-detail-yacht-info d-flex">
+                <h3 className="booking-detail-name">Calma Suite 1</h3>
+                <p className="booking-detail-ref ms-5">Ref #:3265</p>
+              </div>
+
+              <div className="booking-detail-specs">
+                <div className="booking-detail-spec-item">
+                  <img src={engineImg} alt="Engine" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Engine</span>
+                    <span className="booking-detail-spec-value">
+                      Twin Mercury V10
+                    </span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-ii">
+                  <img src={yartShipImg} alt="Length" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Length</span>
+                    <span className="booking-detail-spec-value">16 m</span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-iii">
+                  <img src={powerImg} alt="Power" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Power</span>
+                    <span className="booking-detail-spec-value">
+                      2 x 350 hp
+                    </span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-iv">
+                  <img src={passengerImg} alt="Passengers" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">
+                      Max Passengers
+                    </span>
+                    <span className="booking-detail-spec-value">10 Person</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="booking-detail-section">
+                <h4 className="booking-detail-section-title">
+                  Booking Information
+                </h4>
+                <div className="booking-detail-info-grid">
+                  <div className="booking-detail-info-fields">
+                    <div className="booking-detail-info-fields-row">
+                      <div className="booking-detail-info-field">
+                        <img src={calendarImg} alt="Date" />
+                        <div>
+                          <label>Date</label>
+                          <p>Dec 31, 2025</p>
+                        </div>
+                      </div>
+                      <div className="booking-detail-info-field">
+                        <img src={clockImg} alt="Time" />
+                        <div>
+                          <label>Date</label>
+                          <p>Dec 31, 2025</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="booking-detail-actions">
+                      {/* <button 
+                          type="button" 
+                          className="booking-detail-btn cancel"
+                          onClick={() => setCurrentView("bookingManagement")}
+                        >
+                        </button> */}
+                      <button
+                        type="button"
+                        className="booking-detail-btn reschedule"
+                        onClick={() => setCurrentView("userProfile")}
+                      >
+                        Reschedule
+                      </button>
+                    </div>
+                  </div>
+                  <div className="booking-detail-qr">
+                    <img src={qrCodeImg} alt="QR Code" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : currentView === "userProfile" ? (
+            <div className="user-profile-view">
+              <div className="user-profile-top">
+                <div
+                  className="user-profile-info"
+                  onClick={() => setCurrentView("profileDetails")}
+                >
+                  <div className="user-profile-avatar">
+                    <img src={ profilePic } alt="" />
+                  </div>
+                  <div className="user-profile-text">
+                    <h3 className="user-profile-name">Baki Phillinder</h3>
+                    <p className="user-profile-email">baki@phillinderzen.com</p>
+                  </div>
+                </div>
+
+                <div className="user-membership-card">
+                  <div className="membership-card-content">
+                    <div>
+                      <h3 className="membership-card-title">ELITE</h3>
+                      <p className="membership-card-desc">
+                        Primary Best package
+                      </p>
+                    </div>
+                    <div className="membership-card-right">
+                      <p className="membership-card-price">AED 2,500/mo</p>
+                      <button className="membership-active-btn">Active</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="user-manage-account">
+                <div className="d-flex justify-content-between">
+                <h4 className="manage-account-title">Manage Account</h4>
+                <button
+                  type="button"
+                  className="membership-notification-btn"
+                  onClick={() => setCurrentView("notifications")}
+                >
+                  <i className="bi bi-bell"></i>
+                </button>
+                </div>
+                <div className="manage-account-menu">
+                  <div className="account-menu-item">
+                    <div className="account-menu-icon">
+                      <i className="bi bi-person"></i>
+                    </div>
+                    <span>Personal Information</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                  <div className="account-menu-item">
+                    <div className="account-menu-icon">
+                      <i className="bi bi-heart"></i>
+                    </div>
+                    <span>Favorite Yacht & Boat</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                  <div
+                    className="account-menu-item"
+                    onClick={() => setCurrentView("notifications")}
+                  >
+                    <div className="account-menu-icon">
+                      <i className="bi bi-bell"></i>
+                    </div>
+                    <span>Notifications</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                  <div className="account-menu-item">
+                    <div className="account-menu-icon">
+                      <i className="bi bi-headset"></i>
+                    </div>
+                    <span>Help Center</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                  <div className="account-menu-item">
+                    <div className="account-menu-icon">
+                      <i className="bi bi-lock"></i>
+                    </div>
+                    <span>Change Password</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                  <div
+                    className="account-menu-item"
+                    onClick={() => setCurrentView("packages")}
+                  >
+                    <span>Logout</span>
+                    <i className="bi bi-chevron-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : currentView === "profileDetails" ? (
+            <div className="profile-detail-view">
+              <div className="profile-detail-header">
+                <div className="profile-detail-user">
+                  <div className="profile-detail-avatar">
+                    <img src={ profilePic } alt="" />
+                  </div>
+                  <div className="profile-detail-text">
+                    <h3 className="profile-detail-name">Baki Phillinder</h3>
+                    <p className="profile-detail-email">
+                      baki@phillinderzen.com
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="profile-detail-edit-btn"
+                  onClick={() => setCurrentView("editProfile")}
+                >
+                  <i className="bi bi-pencil"></i>
+                  <span>Edit Profile</span>
+                </button>
+              </div>
+
+              <div className="profile-detail-fields">
+                <div className="profile-detail-field">
+                  <div className="profile-detail-label">Email</div>
+                  <div className="profile-detail-value">
+                    baki@phillinderzen.com
+                  </div>
+                </div>
+                <div className="profile-detail-field">
+                  <div className="profile-detail-label">Phone Number</div>
+                  <div className="profile-detail-value">+971 26 078 7961</div>
+                </div>
+                <div className="profile-detail-field">
+                  <div className="profile-detail-label">Country</div>
+                  <div className="profile-detail-value">
+                    United Arab Emirates
+                  </div>
+                </div>
+                <div className="profile-detail-field">
+                  <div className="profile-detail-label">Gender</div>
+                  <div className="profile-detail-value">Female</div>
+                </div>
+              </div>
+            </div>
+          ) : currentView === "editProfile" ? (
+            <div className="edit-profile-view">
+              <div className="edit-profile-header">
+                <div className="edit-profile-avatar-wrapper">
+                  <img
+                    src={profilePic}
+                    alt="Profile"
+                    className="edit-profile-avatar"
+                  />
+                  <div className="edit-profile-camera">
+                    <i className="bi bi-camera-fill"></i>
+                  </div>
+                </div>
+                <div className="edit-profile-text">
+                  <h3 className="edit-profile-title">Edit Profile</h3>
+                  <p className="edit-profile-subtitle">Change Profile Image</p>
+                </div>
+              </div>
+
+              <div className="edit-profile-form">
+                <div className="edit-profile-row">
+                  <div className="edit-profile-field">
+                    <label className="edit-profile-label">Full Name</label>
+                    <input
+                      className="edit-profile-input"
+                      defaultValue="Baki Phillinder"
+                    />
+                  </div>
+                  <div className="edit-profile-field">
+                    <label className="edit-profile-label">Email</label>
+                    <input
+                      className="edit-profile-input"
+                      defaultValue="baki@phillinderzen.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="edit-profile-row">
+                  <div className="edit-profile-field">
+                    <label className="edit-profile-label">Phone Number</label>
+                    <input
+                      className="edit-profile-input"
+                      defaultValue="+971 25 146 3987"
+                    />
+                  </div>
+                  <div className="edit-profile-field">
+                    <label className="edit-profile-label">Country</label>
+                    <input
+                      className="edit-profile-input"
+                      defaultValue="United Arab Emirates"
+                    />
+                  </div>
+                </div>
+
+                <div className="edit-profile-actions">
+                  <button
+                    type="button"
+                    className="edit-profile-save-btn"
+                    onClick={() => setCurrentView("feedback")}
+                  >
+                    Save Profile
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : currentView === "feedback" ? (
+            <div className="feedback-view">
+              <h2 className="feedback-title">Reviews &amp; Feedback</h2>
+              <p className="feedback-question">
+                How would you rate the overall experience of our App?
+              </p>
+              <div className="feedback-stars">
+                <span className="star active">
+                  <img src={yellowStar} alt="" />
+                </span>
+                <span className="star">
+                  <img src={whiteStar} alt="" />
+                </span>
+                <span className="star">
+                  <img src={whiteStar} alt="" />
+                </span>
+                <span className="star">
+                  <img src={whiteStar} alt="" />
+                </span>
+                <span className="star">
+                  <img src={whiteStar} alt="" />
+                </span>
+              </div>
+              <div className="feedback-form">
+                <label className="feedback-label">Can you tell us more?</label>
+                <textarea
+                  className="feedback-textarea"
+                  defaultValue="We’d love to hear more!"
+                />
+              </div>
+              <div className="feedback-actions">
+                <button
+                  type="button"
+                  className="feedback-btn primary"
+                  onClick={() => setCurrentView("bookingsHome")}
+                >
+                  Submit
+                </button>
+                <button type="button" className="feedback-btn outline">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : currentView === "notifications" ? (
+            <div className="notifications-view">
+              <div className="notifications-card">
+                <h2 className="notifications-title">Notifications</h2>
+                <div className="notifications-list">
+                  {[
+                    {
+                      headline: "Package Successful",
+                      description:
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+                      timestamp: "21 Feb - 08:53 AM",
+                    },
+                    {
+                      headline: "Package Successful",
+                      description:
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+                      timestamp: "21 Feb - 08:53 AM",
+                    },
+                    {
+                      headline: "Package Successful",
+                      description:
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+                      timestamp: "21 Feb - 08:53 AM",
+                    },
+                    {
+                      headline: "Package Successful",
+                      description:
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+                      timestamp: "21 Feb - 08:53 AM",
+                    },
+                  ].map((notification, index) => (
+                    <div key={index} className="notification-item">
+                      <div className="notification-header">
+                        <h3 className="notification-headline">
+                          {notification.headline}
+                        </h3>
+                        <span className="notification-indicator"></span>
+                      </div>
+                      <p className="notification-description">
+                        {notification.description}
+                      </p>
+                      <p className="notification-timestamp">
+                        {notification.timestamp}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : currentView === "bookingsHome" ? (
+            <div className="bookings-home-view">
+              {/* Hero Image Section */}
+              <div className="bookings-hero-section">
+                <img
+                  src={bdShipImg}
+                  alt="Luxury Yacht"
+                  className="bookings-hero-image"
+                />
+              </div>
+
+              {/* Interactive Elements Section */}
+              <div className="bookings-interactive-section">
+                <div className="bookings-type-buttons">
+                  <button
+                    type="button"
+                    className={`bookings-type-btn ${
+                      selectedBookingType === "bookings" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedBookingType("bookings");
+                      setCurrentView("bookingsHome");
+                    }}
+                  >
+                    <img src={blueShip} className="bookings-type-btn-img" alt="" />
+                    <span>Bookings</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`bookings-type-btn ${
+                      selectedBookingType === "experiences" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedBookingType("experiences");
+                      setCurrentView("experiencesHome");
+                    }}
+                  >
+                    <img src={ experiences } className="bookings-type-experiences-img" alt="" />
+                    <span>Experiences</span>
+                  </button>
+                </div>
+                <div className="bookings-marina-select">
+                  <select
+                    className="marina-dropdown"
+                    value={selectedMarina}
+                    onChange={(e) => setSelectedMarina(e.target.value)}
+                  >
+                    <option value="">Select Marina</option>
+                    <option value="marina1">Marina 1</option>
+                    <option value="marina2">Marina 2</option>
+                    <option value="marina3">Marina 3</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Boat Listings Grid */}
+              <div className="bookings-listings-grid">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="bookings-listing-card">
+                    <div className="bookings-listing-image">
+                      <img src={bookingShips} alt="Boat" />
+                    </div>
+                    <div className="bookings-listing-content">
+                      <h3 className="bookings-listing-title">Calma Suite 1</h3>
+                      <p className="bookings-listing-ref">Ref #:3265</p>
+                      <p className="bookings-listing-date">
+                        Dec 31, 2025 - 10 AM - 12 PM
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : currentView === "experiencesHome" ? (
+            <div className="experiences-home-view">
+              {/* Hero Image Section */}
+              <div className="experiences-hero-section">
+                <img
+                  src={landingBg}
+                  alt="Luxury Yacht"
+                  className="experiences-hero-image"
+                />
+              </div>
+
+              {/* Interactive Elements Section */}
+              <div className="experiences-interactive-section">
+                <div className="experiences-type-buttons">
+                  <button
+                    type="button"
+                    className={`experiences-type-btn ${
+                      selectedBookingType === "bookings" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedBookingType("bookings");
+                      setCurrentView("bookingsHome");
+                    }}
+                  >
+                    <img src={ whiteBlueShip } className="bookings-type-experiences-img" alt="" />
+                    <span>Bookings</span>
+                  </button>
+                  <button
+                    type="button"
+                    className={`experiences-type-btn ${
+                      selectedBookingType === "experiences" ? "active" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedBookingType("experiences");
+                      setCurrentView("experiencesHome");
+                    }}
+                  >
+                    <img src={ blueThumbsUp } className="bookings-type-experiences-img" alt="" />
+                    <span>Experiences</span>
+                  </button>
+                </div>
+                <div className="experiences-marina-select">
+                  <select
+                    className="marina-dropdown"
+                    value={selectedMarina}
+                    onChange={(e) => setSelectedMarina(e.target.value)}
+                  >
+                    <option value="">Select Marina</option>
+                    <option value="marina1">Marina 1</option>
+                    <option value="marina2">Marina 2</option>
+                    <option value="marina3">Marina 3</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Boat Listings */}
+              <div className="experiences-listings-grid">
+                {[...Array(6)].map((_, index) => {
+                  const boat = boatsData[index % boatsData.length];
+                  return (
+                    <div key={index} className="experiences-listing-card">
+                      <div className="experiences-listing-image">
+                        <img src={boat.image} alt={boat.title} />
+                      </div>
+                      <div className="experiences-listing-content">
+                        <h3 className="experiences-listing-title">
+                          {boat.title}
+                        </h3>
+                        <p className="experiences-listing-engine">
+                          {boat.engine}
+                        </p>
+                        <p className="experiences-listing-length">
+                          {boat.length}
+                        </p>
+                        <button
+                          type="button"
+                          className="experiences-book-btn"
+                          onClick={() => setCurrentView("bookingRequest")}
+                        >
+                          Book Now
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : currentView === "bookingRequest" ? (
+            <div className="booking-request-view">
+              <div className="booking-request-card">
+                <h2 className="booking-request-title">Booking Request</h2>
+
+                <form
+                  className="booking-request-form"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setShowBookingSuccess(true);
+                  }}
+                >
+                  <div className="booking-form-columns">
+                    {/* Left Column */}
+                    <div className="booking-form-column">
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">Full Name</label>
+                        <input
+                          type="text"
+                          className="booking-form-input"
+                          placeholder="Sheikh Bin Tamim"
+                        />
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">Email</label>
+                        <input
+                          type="email"
+                          className="booking-form-input"
+                          placeholder="sheikh@bintamim.com"
+                        />
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">Date</label>
+                        <input
+                          type="text"
+                          className="booking-form-input"
+                          placeholder="Select Date"
+                          readOnly
+                        />
+                        <i className="bi bi-chevron-down booking-form-dropdown-icon"></i>
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">
+                          Promo code (optional)
+                        </label>
+                        <div className="booking-promo-wrapper">
+                          <input
+                            type="text"
+                            className="booking-form-input booking-promo-input"
+                            placeholder="Enter Code"
+                          />
+                          <button
+                            type="button"
+                            className="booking-promo-apply-btn"
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="booking-form-column">
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">Email</label>
+                        <input
+                          type="tel"
+                          className="booking-form-input"
+                          placeholder="+971 24 153 6987"
+                        />
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">
+                          Emirates Id (optional)
+                        </label>
+                        <input
+                          type="text"
+                          className="booking-form-input"
+                          placeholder="784 - x x x x x x x x x x"
+                        />
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">Time</label>
+                        <input
+                          type="text"
+                          className="booking-form-input"
+                          placeholder="Select Time"
+                          readOnly
+                        />
+                        <i className="bi bi-chevron-down booking-form-dropdown-icon"></i>
+                      </div>
+
+                      <div className="booking-form-field">
+                        <label className="booking-form-label">
+                          Special Requests
+                        </label>
+                        <textarea
+                          className="booking-form-textarea"
+                          placeholder="Enter Text"
+                          rows="4"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="booking-form-submit-container">
+                    <button type="submit" className="booking-form-submit-btn">
+                      Submit
+                    </button>
+                    <button
+                      type="button"
+                      className="booking-form-view-experience-btn"
+                      onClick={() => setCurrentView("experienceDetail")}
+                    >
+                      View Experience
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          ) : currentView === "experienceDetail" ? (
+            <div className="experience-detail-view">
+              {/* Hero Section */}
+              <div className="experience-hero-section">
+                <div
+                  className="experience-hero-bg">
+                </div>
+
+                {/* Information Card Overlay */}
+                <div className="experience-info-card">
+                  <h1 className="experience-info-title">
+                    Enjoy Birthday Party for group of 10
+                  </h1>
+                  <p className="experience-info-description">
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+                    aut fugit.
+                  </p>
+
+                  <div className="experience-details">
+                    <div className="experience-detail-item">
+                      <i className="bi bi-ship experience-detail-icon"></i>
+                      <div className="experience-detail-text">
+                        <span className="experience-detail-label">Boat</span>
+                        <span className="experience-detail-sub">
+                          Subject to availability
+                        </span>
+                      </div>
+                    </div>
+                    <div className="experience-detail-item">
+                      <i className="bi bi-people experience-detail-icon"></i>
+                      <div className="experience-detail-text">
+                        <span className="experience-detail-label">10</span>
+                        <span className="experience-detail-sub">
+                          Max Passengers
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="experience-book-btn"
+                    onClick={() => setCurrentView("bookingRequest")}
+                  >
+                    Book Experience
+                  </button>
+                </div>
+
+                {/* Thumbnail Images */}
+                <div className="experience-thumbnails">
+                  <div className="experience-thumbnail">
+                    <img src={boatCard1} alt="Bedroom" />
+                  </div>
+                  <div className="experience-thumbnail">
+                    <img src={boatCard2} alt="Kitchen" />
+                  </div>
+                  <div className="experience-thumbnail">
+                    <img src={boatCard3} alt="Lounge" />
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
@@ -1048,8 +1943,8 @@ const Membership = () => {
             </div>
             <h3 className="success-title">Successful</h3>
             <p className="success-subtitle">
-              Your payment has been done successfully to <br /> check this you can
-              visit the order page
+              Your payment has been done successfully to <br /> check this you
+              can visit the order page
             </p>
             <button
               className="success-primary"
@@ -1120,6 +2015,36 @@ const Membership = () => {
               }}
             >
               Save
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showBookingSuccess && (
+        <div className="booking-success-overlay">
+          <div className="booking-success-modal">
+            <button
+              className="booking-success-close"
+              onClick={() => setShowBookingSuccess(false)}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <div className="booking-success-icon">
+              <div className="booking-success-icon-circle">
+                <img src={ whiteTransparentTick } className="booking-success-img-circle" alt="" />
+              </div>
+            </div>
+            <h3 className="booking-success-title">Submitted Successful!</h3>
+            <p className="booking-success-message">
+              We have received your request, our team <br /> will contact with you
+              soon.
+            </p>
+            <button
+              className="booking-success-ok-btn"
+              onClick={() => setShowBookingSuccess(false)}
+            >
+              Ok
             </button>
           </div>
         </div>
