@@ -16,31 +16,30 @@ import Footer from "../components/Footer";
 
 const services = [
   {
-    title: "Membership",
+    title: "Exclusive Membership",
     description:
-      "Neque porro quisquam est qui dolorem ipsum",
+      "Gain access to a curated fleet of luxury yachts and premium lifestyle privileges.",
     image: membershipImg,
     bgImage: memberBg,
   },
   {
-    title: "Orientation",
+    title: "Personalized Orientation",
     description:
-      "Neque porro quisquam est qui dolorem ipsum.",
+      "A guided onboarding experience to help you explore your membership benefits with ease.",
     image: orientationImg,
     bgImage: orientationBg,
   },
   {
-    title: "Payment",
+    title: "Secure Payments",
     description:
-      "Neque porro quisquam est qui dolorem ipsum.",
+      "Transparent and secure payment options designed for a smooth and trusted experience.",
     image: paymentImg,
     bgImage: memberBg,
-
   },
   {
-    title: "Bookings",
+    title: "Effortless Bookings",
     description:
-      "Neque porro quisquam est qui dolorem ipsum.",
+      "Book your yacht experiences effortlessly with flexible scheduling and premium support.",
     image: bookingImg,
     bgImage: orientationBg,
   },
@@ -48,20 +47,20 @@ const services = [
 
 const boats = [
   {
-    title: "Calma Suite 1",
-    engine: "Engine: Twin Mercury V1",
+    title: "250 DAUNTLESS #1",
+    engine: "Location: Royal M Marina",
     length: "Length:16m",
     image: boatCard1,
   },
   {
-    title: "TENDER 9 (T9)",
-    engine: "Twin Mercury Verado V6 (2 x 225 hp)",
+    title: "250 DAUNTLESS #2",
+    engine: "Location: Royal M Marina",
     length: "Length:16m",
     image: boatCard2,
   },
   {
-    title: "Calma Suite 3",
-    engine: "Engine: Twin Mercury V1",
+    title: "250 DAUNTLESS #3",
+    engine: "Location: Royal M Marina",
     length: "Length:16m",
     image: boatCard3,
   },
@@ -84,21 +83,26 @@ const HomePage = () => {
         style={{ backgroundImage: `url(${landingBg})` }}
       >
         <div className="landing-overlay mt-5">
-          <div className="landing-hero-content" data-aos="fade-up" data-aos-delay="200">
-            <p className="landing-kicker">
-              Experience Nirvana Yachts &amp; Boats
-            </p>
-            <h1>Your New Adventure Starts Here!</h1>
+          <div
+            className="landing-hero-content"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <p className="landing-kicker">Welcome to Nirvana Yacht Club</p>
+            <h1>Redefining Luxury Yacht Experiences</h1>
           </div>
         </div>
       </section>
 
       <section className="landing-services">
         {services.map((service, index) => (
-          <div 
-            key={service.title} 
+          <div
+            key={service.title}
             className="service-card"
-            style={{ backgroundImage: `url(${service.bgImage})`, height: '430px' }}
+            style={{
+              backgroundImage: `url(${service.bgImage})`,
+              height: "430px",
+            }}
             data-aos="fade-up"
             data-aos-delay={index * 100}
           >
@@ -108,26 +112,29 @@ const HomePage = () => {
             <h3>{service.title}</h3>
             <p className="service-description">{service.description}</p>
             <p className="service-small">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo.
+              Enjoy a seamless, members-only experience designed to deliver
+              comfort, exclusivity, and unforgettable moments on the water.
             </p>
           </div>
         ))}
       </section>
 
-      <div className="services-spacer" />
+      {/* Services Spacer */}
 
+      <div className="services-spacer" />
       <section className="boats-section">
         <div className="boats-header" data-aos="fade-up">
           <p className="boats-kicker">Boats &amp; Yachts</p>
-          <h2 className="boats-heading">Top Luxurious Boat</h2>
+          <h2 className="boats-heading">Our Premium Fleet</h2>
+          <p className="text-black mt-3">
+            Discover our collection of luxury boats, perfect for your next
+            adventure on the water
+          </p>
         </div>
         <div className="boats-grid">
           {boats.map((boat, index) => (
-            <div 
-              className="boat-card" 
+            <div
+              className="boat-card"
               key={boat.title}
               data-aos="fade-up"
               data-aos-delay={index * 150}
@@ -140,7 +147,7 @@ const HomePage = () => {
                 <div className="boat-card-title">{boat.title}</div>
                 <div className="boat-card-meta">
                   <span>{boat.engine}</span>
-                  <span>{boat.length}</span>
+                  {/* <span>{boat.length}</span> */}
                 </div>
               </div>
             </div>

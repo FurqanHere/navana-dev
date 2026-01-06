@@ -68,69 +68,90 @@ const redIcon = new L.Icon({
 
 const membershipPackages = [
   {
-    name: "SEALUX",
-    price: "AED 1,499/",
-    duration: "mo",
+    name: "Sealux",
+    price: "1,499.00 AED/Monthly",
+    description: "Perfect for occasional boaters",
     benefits: [
-      "10 Bookings per Month",
-      "Category B Boat Access",
-      "Weekdays Access",
-      "1 Weekend Access per Month",
-      "Session Merging (Once a Month)",
-      "3 Rolling Bookings",
-      "3 Free In-House Captains per Year",
-      "60 Freezing Days",
+      "7 Boat Booking (bookings)",
+      "Boat Category Access",
+      "Weekday Access",
+      "1 Session Merging (per month)",
+      "2 Rolling Bookings (Slots)",
+      "3 In-House Captains (per year)",
+      "60 days Freezing Days",
     ],
   },
   {
-    name: "SEA DWELLER",
-    price: "AED 1,700/",
-    duration: "mo",
+    name: "Sea Dweller",
+    price: "1,700.00 AED/Monthly",
+    description: "For regular yacht enthusiasts",
     benefits: [
-      "10 Bookings per Month",
-      "Category B Boat Access",
-      "Weekdays Access",
-      "1 Weekend Access per Month",
-      "Session Merging (Once a Month)",
-      "3 Rolling Bookings",
-      "3 Free In-House Captains per Year",
-      "60 Freezing Days",
+      "7 Boat Booking (bookings)",
+      "Boat Category Access",
+      "Weekday Access",
+      "1 Weekend Access (per month)",
+      "3 Future Bookings (Bookings)",
+      "1 Session Merging (per month)",
+      "3 Rolling Bookings (Slots)",
+      "3 In-House Captains (per year)",
+      "60 days Freezing Days",
     ],
   },
   {
-    name: "ELITE",
-    price: "AED 2,500/",
-    duration: "mo",
+    name: "Elite",
+    price: "2,500.00 AED/Monthly",
+    description: "Premium experience with enhanced benefits",
     benefits: [
-      "10 Bookings per Month",
-      "Category B Boat Access",
-      "Weekdays Access",
-      "1 Weekend Access per Month",
-      "Session Merging (Once a Month)",
-      "3 Rolling Bookings",
-      "3 Free In-House Captains per Year",
-      "60 Freezing Days",
+      "12 Boat Booking (bookings)",
+      "Boat Category Access",
+      "Weekday Access",
+      "5 Weekend Access (per month)",
+      "4 Future Bookings (Bookings)",
+      "2 Session Merging (per month)",
+      "3 Rolling Bookings (Slots)",
+      "1 Houseboat Access (per period)",
+      "3 In-House Captains (per year)",
+      "60 days Freezing Days",
+    ],
+  },
+  {
+    name: "Royal",
+    price: "8,000.00 AED/Monthly",
+    description: "Ultimate luxury experience with unlimited benefits",
+    benefits: [
+      "10 Boat Booking (bookings)",
+      "Boat Category Access",
+      "Weekday Access",
+      "2 Weekend Access (per month)",
+      "3 Future Bookings (Bookings)",
+      "2 Session Merging (per month)",
+      "3 Rolling Bookings (Slots)",
+      "1 Houseboat Access (per period)",
+      "Unlimited In-House Captains",
+      "75 days Freezing Days",
+      "Dual Membership",
     ],
   },
 ];
 
+
 const boatsData = [
   {
-    title: "Calma Suite 1",
-    engine: "Engine: Twin Mercury V1",
-    length: "Length:16m",
+    title: "250 DAUNTLESS #2",
+    engine: "Twin Mercury V6 (2 X 225 hp)",
+    length: "",
     image: boatCard1,
   },
   {
-    title: "TENDER 9 (T9)",
-    engine: "Twin Mercury Verado V6 (2 x 225 hp)",
-    length: "Length:16m",
+    title: "250 DAUNTLESS #3",
+    engine: "Mercury V8 (300 hp)",
+    length: "",
     image: boatCard2,
   },
   {
-    title: "Calma Suite 3",
-    engine: "Engine: Twin Mercury V1",
-    length: "Length:16m",
+    title: "250 DAUNTLESS #1",
+    engine: "Mercury F115 (115 hp)",
+    length: "",
     image: boatCard3,
   },
 ];
@@ -152,7 +173,7 @@ const Membership = () => {
   const [selectedBookingType, setSelectedBookingType] = useState("bookings");
   const [selectedMarina, setSelectedMarina] = useState("");
   const [showBookingSuccess, setShowBookingSuccess] = useState(false);
-  
+
   // Personal Details Form State
   const [personalDetails, setPersonalDetails] = useState({
     fullName: "",
@@ -272,7 +293,8 @@ const Membership = () => {
     if (!personalDetails.emiratesId.trim()) {
       errors.emiratesId = "Emirates ID is required";
     } else if (!validateEmiratesID(personalDetails.emiratesId)) {
-      errors.emiratesId = "Please enter a valid Emirates ID (format: 784-xxxx-xxxxxxx-x)";
+      errors.emiratesId =
+        "Please enter a valid Emirates ID (format: 784-xxxx-xxxxxxx-x)";
     }
     if (!personalDetails.passport.trim()) {
       errors.passport = "Passport is required";
@@ -328,8 +350,12 @@ const Membership = () => {
     if (!bookingRequest.time.trim()) {
       errors.time = "Time is required";
     }
-    if (bookingRequest.emiratesId && !validateEmiratesID(bookingRequest.emiratesId)) {
-      errors.emiratesId = "Please enter a valid Emirates ID (format: 784-xxxx-xxxxxxx-x)";
+    if (
+      bookingRequest.emiratesId &&
+      !validateEmiratesID(bookingRequest.emiratesId)
+    ) {
+      errors.emiratesId =
+        "Please enter a valid Emirates ID (format: 784-xxxx-xxxxxxx-x)";
     }
     setBookingRequestErrors(errors);
     return Object.keys(errors).length === 0;
@@ -363,46 +389,75 @@ const Membership = () => {
       <Header />
       <section
         className="membership-hero"
-        style={{ 
-          backgroundImage: currentView === "bookingManagement" || 
-                          currentView === "bookingDetail" ||
-                          currentView === "userProfile" ||
-                          currentView === "profileDetails" ||
-                          currentView === "editProfile" ||
-                          currentView === "feedback" ||
-                          currentView === "notifications" ||
-                          currentView === "bookingsHome" ||
-                          currentView === "experiencesHome" ||
-                          currentView === "bookingRequest" ||
-                          currentView === "experienceDetail"
-            ? "none" 
-            : `url(${landingBg})` 
+        style={{
+          backgroundImage:
+            currentView === "detailPage"
+              ? `url(${tenderShip}), url(${membershipBgImg})`
+              : currentView === "bookingManagement" ||
+                currentView === "bookingDetail" ||
+                currentView === "userProfile" ||
+                currentView === "profileDetails" ||
+                currentView === "editProfile" ||
+                currentView === "feedback" ||
+                currentView === "notifications" ||
+                currentView === "bookingsHome" ||
+                currentView === "experiencesHome" ||
+                currentView === "bookingRequest" ||
+                currentView === "experienceDetail"
+              ? "none"
+              : `url(${landingBg})`,
+          backgroundSize:
+            currentView === "detailPage" ? "contain, cover" : undefined,
+          backgroundPosition:
+            currentView === "detailPage" ? "top center, top center" : undefined,
+          backgroundRepeat:
+            currentView === "detailPage" ? "no-repeat, no-repeat" : undefined,
         }}
       ></section>
 
       <section
         className="membership-packages-section"
-        style={{ 
-          backgroundImage: currentView === "detailPage" 
-            ? `url(${tenderShip})` 
-            : `url(${membershipBgImg})`,
-          backgroundSize: currentView === "detailPage" 
-            ? "contain" 
-            : "cover",
-          marginTop: currentView === "bookingManagement" ||
-                    currentView === "bookingDetail" ||
-                    currentView === "userProfile" ||
-                    currentView === "profileDetails" ||
-                    currentView === "editProfile" ||
-                    currentView === "feedback" ||
-                    currentView === "notifications" ||
-                    currentView === "bookingsHome" ||
-                    currentView === "experiencesHome" ||
-                    currentView === "bookingRequest" ||
-                    currentView === "experienceDetail"
-            ? "-916px" 
-            : undefined,
-          paddingTop: currentView === "experienceDetail" ? "0" : undefined
+        style={{
+          // Layer tenderShip over the existing membership background only for experienceDetail
+          backgroundImage:
+            currentView === "experienceDetail"
+              ? `url(${tenderShip}), url(${membershipBgImg})`
+              : currentView === "detailPage"
+              ? "none"
+              : `url(${membershipBgImg})`,
+          // Ship sits up top; blue gradient anchors at the bottom to stay visible
+          backgroundSize:
+            currentView === "experienceDetail" ? "contain, cover" : "cover",
+          backgroundPosition:
+            currentView === "experienceDetail"
+              ? "top center, bottom center"
+              : "top center",
+          backgroundRepeat:
+            currentView === "experienceDetail"
+              ? "no-repeat, no-repeat"
+              : "no-repeat",
+          marginTop:
+            currentView === "detailPage"
+              ? "-580px"
+              : currentView === "bookingManagement" ||
+                currentView === "bookingDetail" ||
+                currentView === "userProfile" ||
+                currentView === "profileDetails" ||
+                currentView === "editProfile" ||
+                currentView === "feedback" ||
+                currentView === "notifications" ||
+                currentView === "bookingsHome" ||
+                currentView === "experiencesHome" ||
+                currentView === "bookingRequest" ||
+                currentView === "experienceDetail"
+              ? "-945px"
+              : undefined,
+          paddingTop:
+            currentView === "notifications"
+              ? "170px"
+              : currentView === "experienceDetail"
+              ? "0"
+              : undefined,
         }}
       >
         {currentView !== "schedule" &&
@@ -460,10 +515,10 @@ const Membership = () => {
                       className="membership-card-button"
                       onClick={() => {
                         setSelectedPackage(pkg.name);
-                        setCurrentView("briefing");
+                        setCurrentView("schedule");
                       }}
                     >
-                      Select Package
+                      Purchase Now
                     </button>
                   </div>
                 ))}
@@ -474,7 +529,7 @@ const Membership = () => {
                   className="membership-bottom-btn"
                   data-aos="fade-up"
                   data-aos-delay="450"
-                  onClick={() => handleButtonClick("briefing")}
+                  onClick={() => handleButtonClick("schedule")}
                 >
                   <img src={yartImg} alt="Club Briefing" />
                   <span>Club Briefing</span>
@@ -595,67 +650,123 @@ const Membership = () => {
               <h2 className="details-heading">
                 Personal Details &amp; Agreement
               </h2>
-              <div className="details-card">
-                <div className="details-row">
-                  <div className="details-field">
-                    <label>Full Name <span className="required-asterisk">*</span></label>
-                    <input 
-                      value={personalDetails.fullName}
-                      onChange={(e) => setPersonalDetails({...personalDetails, fullName: e.target.value})}
-                      className={personalDetailsErrors.fullName ? "error" : ""}
-                    />
-                    {personalDetailsErrors.fullName && (
-                      <span className="error-message">{personalDetailsErrors.fullName}</span>
-                    )}
+              <div className="details-content-wrapper">
+                <div className="details-card">
+                  <div className="details-row">
+                    <div className="details-field">
+                      <label>
+                        Full Name <span className="required-asterisk">*</span>
+                      </label>
+                      <input
+                        value={personalDetails.fullName}
+                        onChange={(e) =>
+                          setPersonalDetails({
+                            ...personalDetails,
+                            fullName: e.target.value,
+                          })
+                        }
+                        className={
+                          personalDetailsErrors.fullName ? "error" : ""
+                        }
+                      />
+                      {personalDetailsErrors.fullName && (
+                        <span className="error-message">
+                          {personalDetailsErrors.fullName}
+                        </span>
+                      )}
+                    </div>
+                    <div className="details-field">
+                      <label>
+                        Phone Number{" "}
+                        <span className="required-asterisk">*</span>
+                      </label>
+                      <input
+                        value={personalDetails.phone}
+                        onChange={(e) =>
+                          setPersonalDetails({
+                            ...personalDetails,
+                            phone: e.target.value,
+                          })
+                        }
+                        className={personalDetailsErrors.phone ? "error" : ""}
+                      />
+                      {personalDetailsErrors.phone && (
+                        <span className="error-message">
+                          {personalDetailsErrors.phone}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="details-field">
-                    <label>Phone Number <span className="required-asterisk">*</span></label>
-                    <input 
-                      value={personalDetails.phone}
-                      onChange={(e) => setPersonalDetails({...personalDetails, phone: e.target.value})}
-                      className={personalDetailsErrors.phone ? "error" : ""}
-                    />
-                    {personalDetailsErrors.phone && (
-                      <span className="error-message">{personalDetailsErrors.phone}</span>
-                    )}
+                  <div className="details-row">
+                    <div className="details-field">
+                      <label>
+                        Nationality <span className="required-asterisk">*</span>
+                      </label>
+                      <input
+                        value={personalDetails.nationality}
+                        onChange={(e) =>
+                          setPersonalDetails({
+                            ...personalDetails,
+                            nationality: e.target.value,
+                          })
+                        }
+                        className={
+                          personalDetailsErrors.nationality ? "error" : ""
+                        }
+                      />
+                      {personalDetailsErrors.nationality && (
+                        <span className="error-message">
+                          {personalDetailsErrors.nationality}
+                        </span>
+                      )}
+                    </div>
+                    <div className="details-field">
+                      <label>
+                        Emirates ID <span className="required-asterisk">*</span>
+                      </label>
+                      <input
+                        value={personalDetails.emiratesId}
+                        onChange={(e) =>
+                          setPersonalDetails({
+                            ...personalDetails,
+                            emiratesId: e.target.value,
+                          })
+                        }
+                        className={
+                          personalDetailsErrors.emiratesId ? "error" : ""
+                        }
+                        placeholder="784-xxxx-xxxxxxx-x"
+                      />
+                      {personalDetailsErrors.emiratesId && (
+                        <span className="error-message">
+                          {personalDetailsErrors.emiratesId}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="details-row">
-                  <div className="details-field">
-                    <label>Nationality <span className="required-asterisk">*</span></label>
-                    <input 
-                      value={personalDetails.nationality}
-                      onChange={(e) => setPersonalDetails({...personalDetails, nationality: e.target.value})}
-                      className={personalDetailsErrors.nationality ? "error" : ""}
-                    />
-                    {personalDetailsErrors.nationality && (
-                      <span className="error-message">{personalDetailsErrors.nationality}</span>
-                    )}
-                  </div>
-                  <div className="details-field">
-                    <label>Emirates ID <span className="required-asterisk">*</span></label>
-                    <input 
-                      value={personalDetails.emiratesId}
-                      onChange={(e) => setPersonalDetails({...personalDetails, emiratesId: e.target.value})}
-                      className={personalDetailsErrors.emiratesId ? "error" : ""}
-                      placeholder="784-xxxx-xxxxxxx-x"
-                    />
-                    {personalDetailsErrors.emiratesId && (
-                      <span className="error-message">{personalDetailsErrors.emiratesId}</span>
-                    )}
-                  </div>
-                </div>
-                <div className="details-row">
-                  <div className="details-field">
-                    <label>Passport <span className="required-asterisk">*</span></label>
-                    <input 
-                      value={personalDetails.passport}
-                      onChange={(e) => setPersonalDetails({...personalDetails, passport: e.target.value})}
-                      className={personalDetailsErrors.passport ? "error" : ""}
-                    />
-                    {personalDetailsErrors.passport && (
-                      <span className="error-message">{personalDetailsErrors.passport}</span>
-                    )}
+                  <div className="details-row">
+                    <div className="details-field">
+                      <label>
+                        Passport <span className="required-asterisk">*</span>
+                      </label>
+                      <input
+                        value={personalDetails.passport}
+                        onChange={(e) =>
+                          setPersonalDetails({
+                            ...personalDetails,
+                            passport: e.target.value,
+                          })
+                        }
+                        className={
+                          personalDetailsErrors.passport ? "error" : ""
+                        }
+                      />
+                      {personalDetailsErrors.passport && (
+                        <span className="error-message">
+                          {personalDetailsErrors.passport}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -870,71 +981,104 @@ const Membership = () => {
             </div>
           ) : currentView === "cardInfo" ? (
             <div className="card-info-view">
-              <h2 className="details-heading mb-5">Card Information</h2>
-              <div className="details-card">
-                <div className="details-row">
-                  <div className="details-field">
-                    <label>Full Name <span className="required-asterisk">*</span></label>
-                    <input 
+              <h2 className="card-info-heading">Card Information</h2>
+              <div className="card-info-form-card">
+                <div className="card-info-form-row">
+                  <div className="card-info-form-field">
+                    <label>
+                      Full Name <span className="card-info-required">*</span>
+                    </label>
+                    <input
                       value={cardInfo.fullName}
-                      onChange={(e) => setCardInfo({...cardInfo, fullName: e.target.value})}
-                      className={cardInfoErrors.fullName ? "error" : ""}
+                      onChange={(e) =>
+                        setCardInfo({ ...cardInfo, fullName: e.target.value })
+                      }
+                      className={
+                        cardInfoErrors.fullName ? "card-info-input-error" : ""
+                      }
                     />
                     {cardInfoErrors.fullName && (
-                      <span className="error-message">{cardInfoErrors.fullName}</span>
+                      <span className="card-info-error-message">
+                        {cardInfoErrors.fullName}
+                      </span>
                     )}
                   </div>
-                  <div className="details-field">
-                    <label>Card Number <span className="required-asterisk">*</span></label>
-                    <input 
+                  <div className="card-info-form-field">
+                    <label>
+                      Card Number <span className="card-info-required">*</span>
+                    </label>
+                    <input
                       value={cardInfo.cardNumber}
                       onChange={(e) => {
-                        let value = e.target.value.replace(/\s/g, "").replace(/\D/g, "");
+                        let value = e.target.value
+                          .replace(/\s/g, "")
+                          .replace(/\D/g, "");
                         if (value.length > 16) value = value.slice(0, 16);
                         value = value.match(/.{1,4}/g)?.join(" ") || value;
-                        setCardInfo({...cardInfo, cardNumber: value});
+                        setCardInfo({ ...cardInfo, cardNumber: value });
                       }}
-                      className={cardInfoErrors.cardNumber ? "error" : ""}
+                      className={
+                        cardInfoErrors.cardNumber ? "card-info-input-error" : ""
+                      }
                       placeholder="1234 5678 9012 3456"
                       maxLength="19"
                     />
                     {cardInfoErrors.cardNumber && (
-                      <span className="error-message">{cardInfoErrors.cardNumber}</span>
+                      <span className="card-info-error-message">
+                        {cardInfoErrors.cardNumber}
+                      </span>
                     )}
                   </div>
                 </div>
-                <div className="details-row">
-                  <div className="details-field">
-                    <label>Expiry Date <span className="required-asterisk">*</span></label>
-                    <input 
+                <div className="card-info-form-row">
+                  <div className="card-info-form-field">
+                    <label>
+                      Expiry Date <span className="card-info-required">*</span>
+                    </label>
+                    <input
                       value={cardInfo.expiryDate}
                       onChange={(e) => {
                         let value = e.target.value.replace(/\D/g, "");
                         if (value.length >= 2) {
                           value = value.slice(0, 2) + "/" + value.slice(2, 4);
                         }
-                        setCardInfo({...cardInfo, expiryDate: value});
+                        setCardInfo({ ...cardInfo, expiryDate: value });
                       }}
-                      className={cardInfoErrors.expiryDate ? "error" : ""}
+                      className={
+                        cardInfoErrors.expiryDate ? "card-info-input-error" : ""
+                      }
                       placeholder="MM/YY"
                       maxLength="5"
                     />
                     {cardInfoErrors.expiryDate && (
-                      <span className="error-message">{cardInfoErrors.expiryDate}</span>
+                      <span className="card-info-error-message">
+                        {cardInfoErrors.expiryDate}
+                      </span>
                     )}
                   </div>
-                  <div className="details-field">
-                    <label>CVV <span className="required-asterisk">*</span></label>
-                    <input 
+                  <div className="card-info-form-field">
+                    <label>
+                      CVV <span className="card-info-required">*</span>
+                    </label>
+                    <input
                       value={cardInfo.cvv}
-                      onChange={(e) => setCardInfo({...cardInfo, cvv: e.target.value.replace(/\D/g, "")})}
-                      className={cardInfoErrors.cvv ? "error" : ""}
+                      onChange={(e) =>
+                        setCardInfo({
+                          ...cardInfo,
+                          cvv: e.target.value.replace(/\D/g, ""),
+                        })
+                      }
+                      className={
+                        cardInfoErrors.cvv ? "card-info-input-error" : ""
+                      }
                       placeholder="123"
                       maxLength="4"
                       type="password"
                     />
                     {cardInfoErrors.cvv && (
-                      <span className="error-message">{cardInfoErrors.cvv}</span>
+                      <span className="card-info-error-message">
+                        {cardInfoErrors.cvv}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -942,7 +1086,7 @@ const Membership = () => {
               <div className="card-info-pay-container">
                 <button
                   type="button"
-                  className="schedule-submit-btn"
+                  className="card-info-pay-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -1065,35 +1209,27 @@ const Membership = () => {
             </div>
           ) : currentView === "detailPage" ? (
             <div className="detail-view">
-              <div className="detail-hero">
-                <div className="detail-hero-blue-bg"></div>
-                <div className="detail-hero-overlay" />
-                <div className="detail-hero-thumbnails">
-                  <img src={thumbnail1} alt="Bedroom" className="detail-thumbnail" />
-                  <img src={thumbnail2} alt="Living Space" className="detail-thumbnail" />
-                  <img src={thumbnail3} alt="Lounge Area" className="detail-thumbnail" />
-                </div>
-              </div>
-
-              <div className="detail-card">
-                <div className="detail-header">
-                  <div>
-                    <p className="detail-kicker">TENDER 9 (T9)</p>
-                    <p className="detail-subtitle">
-                      Twin Mercury Verado V6 (2 x 225 hp)
-                    </p>
-                  </div>
-                  <div className="detail-specs">
-                    {[
-                      { img: lengthImg, label: "Length:16m" },
-                      { img: personIcon, label: "10 Person" },
-                      { img: bedImg, label: "2 Bed" },
-                    ].map((item) => (
-                      <div key={item.label} className="detail-spec-card">
-                        <img src={item.img} alt={item.label} />
-                        <p>{item.label}</p>
-                      </div>
-                    ))}
+              <div className="detail-card mt-0">
+                <div className="detail-top">
+                  <div className="detail-header">
+                    <div>
+                      <p className="detail-kicker">250 DAUNTLESS #3</p>
+                      <p className="detail-subtitle">
+                        Twin Mercury Verado V6 (2 x 225 hp)
+                      </p>
+                    </div>
+                    <div className="detail-specs">
+                      {[
+                        { img: lengthImg, label: "Length:16m" },
+                        { img: personIcon, label: "10 Person" },
+                        { img: bedImg, label: "2 Bed" },
+                      ].map((item) => (
+                        <div key={item.label} className="detail-spec-card">
+                          <img src={item.img} alt={item.label} />
+                          <p>{item.label}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -1115,28 +1251,52 @@ const Membership = () => {
                     <div className="detail-date-time-fields">
                       <div className="detail-input-wrapper">
                         <input placeholder="Date" className="detail-input" />
-                        <img src={calendarImg} alt="Calendar" className="detail-input-icon" />
+                        <img
+                          src={calendarImg}
+                          alt="Calendar"
+                          className="detail-input-icon"
+                        />
                       </div>
                       <div className="detail-input-wrapper">
                         <input placeholder="Time" className="detail-input" />
-                        <img src={clockImg} alt="Clock" className="detail-input-icon" />
+                        <img
+                          src={clockImg}
+                          alt="Clock"
+                          className="detail-input-icon"
+                        />
                       </div>
                     </div>
                   </div>
 
-                  <div className="detail-row two">
-                    <div className="detail-field">
-                      <label className="detail-field-label">Adults</label>
-                      <div className="detail-input-wrapper">
-                        <input placeholder="MM/YY" className="detail-input" />
-                        <img src={personIcon} alt="Person" className="detail-input-icon" />
+                  <div>
+                    <label className="detail-section-label mb-4">
+                      Passenger
+                    </label>
+                    <div className="detail-row two">
+                      <div className="detail-field">
+                        <label className="detail-field-label">Adults</label>
+                        <div className="detail-input-wrapper">
+                          <input placeholder="MM/YY" className="detail-input" />
+                          <img
+                            src={personIcon}
+                            alt="Person"
+                            className="detail-input-icon"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div className="detail-field">
-                      <label className="detail-field-label">Children</label>
-                      <div className="detail-input-wrapper">
-                        <input placeholder="Children" className="detail-input" />
-                        <img src={personIcon} alt="Person" className="detail-input-icon" />
+                      <div className="detail-field">
+                        <label className="detail-field-label">Children</label>
+                        <div className="detail-input-wrapper">
+                          <input
+                            placeholder="Children"
+                            className="detail-input"
+                          />
+                          <img
+                            src={personIcon}
+                            alt="Person"
+                            className="detail-input-icon"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1281,8 +1441,8 @@ const Membership = () => {
                       <img src={boatDetailBg} alt="Boat" />
                     </div>
                     <div className="booking-card-content">
-                      <h3 className="booking-card-titl3265e">Calma Suite 1</h3>
-                      <p className="booking-card-ref">Ref #:3265</p>
+                      <h3 className="booking-card-titl3265e">250 DAUNTLESS #2</h3>
+                      <p className="booking-card-ref">Registration: NYB-0040</p>
                       <p className="booking-card-date">
                         Dec 31, 2025 - 10 AM - 12 PM
                       </p>
@@ -1304,8 +1464,8 @@ const Membership = () => {
               </div>
 
               <div className="booking-detail-yacht-info d-flex">
-                <h3 className="booking-detail-name">Calma Suite 1</h3>
-                <p className="booking-detail-ref ms-5">Ref #:3265</p>
+                <h3 className="booking-detail-name">250 DAUNTLESS #2</h3>
+                <p className="booking-detail-ref ms-5">Registration: #NYB-0040</p>
               </div>
 
               <div className="booking-detail-specs">
@@ -1314,23 +1474,23 @@ const Membership = () => {
                   <div className="booking-detail-spec-text">
                     <span className="booking-detail-spec-label">Engine</span>
                     <span className="booking-detail-spec-value">
-                      Twin Mercury V10
+                      Mercury V8 (300hp)
                     </span>
                   </div>
                 </div>
                 <div className="booking-detail-spec-item booking-detail-spec-item-ii">
                   <img src={yartShipImg} alt="Length" />
                   <div className="booking-detail-spec-text">
-                    <span className="booking-detail-spec-label">Length</span>
-                    <span className="booking-detail-spec-value">16 m</span>
+                    <span className="booking-detail-spec-label">Modal</span>
+                    <span className="booking-detail-spec-value">250 DAUNTLESS</span>
                   </div>
                 </div>
                 <div className="booking-detail-spec-item booking-detail-spec-item-iii">
                   <img src={powerImg} alt="Power" />
                   <div className="booking-detail-spec-text">
-                    <span className="booking-detail-spec-label">Power</span>
+                    <span className="booking-detail-spec-label">Year</span>
                     <span className="booking-detail-spec-value">
-                      2 x 350 hp
+                      2021
                     </span>
                   </div>
                 </div>
@@ -1338,16 +1498,54 @@ const Membership = () => {
                   <img src={passengerImg} alt="Passengers" />
                   <div className="booking-detail-spec-text">
                     <span className="booking-detail-spec-label">
-                      Max Passengers
+                      Engine Hours
                     </span>
-                    <span className="booking-detail-spec-value">10 Person</span>
+                    <span className="booking-detail-spec-value">237 Hours</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2nd Row */}
+              <div className="booking-detail-specs">
+                <div className="booking-detail-spec-item">
+                  <img src={engineImg} alt="Engine" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Condition</span>
+                    <span className="booking-detail-spec-value">
+                      Fair
+                    </span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-ii">
+                  <img src={yartShipImg} alt="Length" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Slot</span>
+                    <span className="booking-detail-spec-value">40</span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-iii">
+                  <img src={powerImg} alt="Power" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">Category</span>
+                    <span className="booking-detail-spec-value">
+                      B
+                    </span>
+                  </div>
+                </div>
+                <div className="booking-detail-spec-item booking-detail-spec-item-iv">
+                  <img src={passengerImg} alt="Passengers" />
+                  <div className="booking-detail-spec-text">
+                    <span className="booking-detail-spec-label">
+                      Location
+                    </span>
+                    <span className="booking-detail-spec-value">Royal M Marina</span>
                   </div>
                 </div>
               </div>
 
               <div className="booking-detail-section">
                 <h4 className="booking-detail-section-title">
-                  Booking Information
+                  Maintanance
                 </h4>
                 <div className="booking-detail-info-grid">
                   <div className="booking-detail-info-fields">
@@ -1355,17 +1553,17 @@ const Membership = () => {
                       <div className="booking-detail-info-field">
                         <img src={calendarImg} alt="Date" />
                         <div>
-                          <label>Date</label>
-                          <p>Dec 31, 2025</p>
+                          <label>Last Maintanance</label>
+                          <p>Jan 04, 2026</p>
                         </div>
                       </div>
-                      <div className="booking-detail-info-field">
+                      {/* <div className="booking-detail-info-field">
                         <img src={clockImg} alt="Time" />
                         <div>
                           <label>Date</label>
                           <p>Dec 31, 2025</p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="booking-detail-actions">
                       {/* <button 
@@ -1550,50 +1748,94 @@ const Membership = () => {
               <div className="edit-profile-form">
                 <div className="edit-profile-row">
                   <div className="edit-profile-field">
-                    <label className="edit-profile-label">Full Name <span className="required-asterisk">*</span></label>
+                    <label className="edit-profile-label">
+                      Full Name <span className="required-asterisk">*</span>
+                    </label>
                     <input
-                      className={`edit-profile-input ${editProfileErrors.fullName ? "error" : ""}`}
+                      className={`edit-profile-input ${
+                        editProfileErrors.fullName ? "error" : ""
+                      }`}
                       value={editProfile.fullName}
-                      onChange={(e) => setEditProfile({...editProfile, fullName: e.target.value})}
+                      onChange={(e) =>
+                        setEditProfile({
+                          ...editProfile,
+                          fullName: e.target.value,
+                        })
+                      }
                     />
                     {editProfileErrors.fullName && (
-                      <span className="error-message">{editProfileErrors.fullName}</span>
+                      <span className="error-message">
+                        {editProfileErrors.fullName}
+                      </span>
                     )}
                   </div>
                   <div className="edit-profile-field">
-                    <label className="edit-profile-label">Email <span className="required-asterisk">*</span></label>
+                    <label className="edit-profile-label">
+                      Email <span className="required-asterisk">*</span>
+                    </label>
                     <input
-                      className={`edit-profile-input ${editProfileErrors.email ? "error" : ""}`}
+                      className={`edit-profile-input ${
+                        editProfileErrors.email ? "error" : ""
+                      }`}
                       value={editProfile.email}
-                      onChange={(e) => setEditProfile({...editProfile, email: e.target.value})}
+                      onChange={(e) =>
+                        setEditProfile({
+                          ...editProfile,
+                          email: e.target.value,
+                        })
+                      }
                     />
                     {editProfileErrors.email && (
-                      <span className="error-message">{editProfileErrors.email}</span>
+                      <span className="error-message">
+                        {editProfileErrors.email}
+                      </span>
                     )}
                   </div>
                 </div>
 
                 <div className="edit-profile-row">
                   <div className="edit-profile-field">
-                    <label className="edit-profile-label">Phone Number <span className="required-asterisk">*</span></label>
+                    <label className="edit-profile-label">
+                      Phone Number <span className="required-asterisk">*</span>
+                    </label>
                     <input
-                      className={`edit-profile-input ${editProfileErrors.phone ? "error" : ""}`}
+                      className={`edit-profile-input ${
+                        editProfileErrors.phone ? "error" : ""
+                      }`}
                       value={editProfile.phone}
-                      onChange={(e) => setEditProfile({...editProfile, phone: e.target.value})}
+                      onChange={(e) =>
+                        setEditProfile({
+                          ...editProfile,
+                          phone: e.target.value,
+                        })
+                      }
                     />
                     {editProfileErrors.phone && (
-                      <span className="error-message">{editProfileErrors.phone}</span>
+                      <span className="error-message">
+                        {editProfileErrors.phone}
+                      </span>
                     )}
                   </div>
                   <div className="edit-profile-field">
-                    <label className="edit-profile-label">Country <span className="required-asterisk">*</span></label>
+                    <label className="edit-profile-label">
+                      Country <span className="required-asterisk">*</span>
+                    </label>
                     <input
-                      className={`edit-profile-input ${editProfileErrors.country ? "error" : ""}`}
+                      className={`edit-profile-input ${
+                        editProfileErrors.country ? "error" : ""
+                      }`}
                       value={editProfile.country}
-                      onChange={(e) => setEditProfile({...editProfile, country: e.target.value})}
+                      onChange={(e) =>
+                        setEditProfile({
+                          ...editProfile,
+                          country: e.target.value,
+                        })
+                      }
                     />
                     {editProfileErrors.country && (
-                      <span className="error-message">{editProfileErrors.country}</span>
+                      <span className="error-message">
+                        {editProfileErrors.country}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -1776,8 +2018,8 @@ const Membership = () => {
                       <img src={bookingShips} alt="Boat" />
                     </div>
                     <div className="bookings-listing-content">
-                      <h3 className="bookings-listing-title">Calma Suite 1</h3>
-                      <p className="bookings-listing-ref">Ref #:3265</p>
+                      <h3 className="bookings-listing-title">250 DAUNTLESS #2</h3>
+                      <p className="bookings-listing-ref">Registration: NYB-0040</p>
                       <p className="bookings-listing-date">
                         Dec 31, 2025 - 10 AM - 12 PM
                       </p>
@@ -1854,28 +2096,27 @@ const Membership = () => {
                 {[...Array(6)].map((_, index) => {
                   const boat = boatsData[index % boatsData.length];
                   return (
-                    <div key={index} className="experiences-listing-card">
+                    <div
+                      key={index}
+                      className="experiences-listing-card"
+                      onClick={() => setCurrentView("bookingRequest")}
+                    >
                       <div className="experiences-listing-image">
                         <img src={boat.image} alt={boat.title} />
                         <div className="experiences-listing-content">
-                          <h3 className="experiences-listing-title">
-                            {boat.title}
-                          </h3>
-                          <p className="experiences-listing-engine">
-                            {boat.engine}
-                          </p>
+                          <div className="experiences-listing-content-left">
+                            <h3 className="experiences-listing-title">
+                              {boat.title}
+                            </h3>
+                            <p className="experiences-listing-engine">
+                              {boat.engine}
+                            </p>
+                          </div>
                           <p className="experiences-listing-length">
                             {boat.length}
                           </p>
                         </div>
                       </div>
-                      <button
-                        type="button"
-                        className="experiences-book-btn"
-                        onClick={() => setCurrentView("bookingRequest")}
-                      >
-                        Book Now
-                      </button>
                     </div>
                   );
                 })}
@@ -1899,44 +2140,77 @@ const Membership = () => {
                     {/* Left Column */}
                     <div className="booking-form-column">
                       <div className="booking-form-field">
-                        <label className="booking-form-label">Full Name <span className="required-asterisk">*</span></label>
+                        <label className="booking-form-label">
+                          Full Name <span className="required-asterisk">*</span>
+                        </label>
                         <input
                           type="text"
-                          className={`booking-form-input ${bookingRequestErrors.fullName ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.fullName ? "error" : ""
+                          }`}
                           placeholder="Sheikh Bin Tamim"
                           value={bookingRequest.fullName}
-                          onChange={(e) => setBookingRequest({...bookingRequest, fullName: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              fullName: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.fullName && (
-                          <span className="error-message">{bookingRequestErrors.fullName}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.fullName}
+                          </span>
                         )}
                       </div>
 
                       <div className="booking-form-field">
-                        <label className="booking-form-label">Email <span className="required-asterisk">*</span></label>
+                        <label className="booking-form-label">
+                          Email <span className="required-asterisk">*</span>
+                        </label>
                         <input
                           type="email"
-                          className={`booking-form-input ${bookingRequestErrors.email ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.email ? "error" : ""
+                          }`}
                           placeholder="sheikh@bintamim.com"
                           value={bookingRequest.email}
-                          onChange={(e) => setBookingRequest({...bookingRequest, email: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              email: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.email && (
-                          <span className="error-message">{bookingRequestErrors.email}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.email}
+                          </span>
                         )}
                       </div>
 
                       <div className="booking-form-field">
-                        <label className="booking-form-label">Date <span className="required-asterisk">*</span></label>
+                        <label className="booking-form-label">
+                          Date <span className="required-asterisk">*</span>
+                        </label>
                         <input
                           type="text"
-                          className={`booking-form-input ${bookingRequestErrors.date ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.date ? "error" : ""
+                          }`}
                           placeholder="Select Date"
                           value={bookingRequest.date}
-                          onChange={(e) => setBookingRequest({...bookingRequest, date: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              date: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.date && (
-                          <span className="error-message">{bookingRequestErrors.date}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.date}
+                          </span>
                         )}
                       </div>
 
@@ -1950,7 +2224,12 @@ const Membership = () => {
                             className="booking-form-input booking-promo-input"
                             placeholder="Enter Code"
                             value={bookingRequest.promoCode}
-                            onChange={(e) => setBookingRequest({...bookingRequest, promoCode: e.target.value})}
+                            onChange={(e) =>
+                              setBookingRequest({
+                                ...bookingRequest,
+                                promoCode: e.target.value,
+                              })
+                            }
                           />
                           <button
                             type="button"
@@ -1965,16 +2244,28 @@ const Membership = () => {
                     {/* Right Column */}
                     <div className="booking-form-column">
                       <div className="booking-form-field">
-                        <label className="booking-form-label">Phone Number <span className="required-asterisk">*</span></label>
+                        <label className="booking-form-label">
+                          Phone Number{" "}
+                          <span className="required-asterisk">*</span>
+                        </label>
                         <input
                           type="tel"
-                          className={`booking-form-input ${bookingRequestErrors.phone ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.phone ? "error" : ""
+                          }`}
                           placeholder="+971 24 153 6987"
                           value={bookingRequest.phone}
-                          onChange={(e) => setBookingRequest({...bookingRequest, phone: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              phone: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.phone && (
-                          <span className="error-message">{bookingRequestErrors.phone}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.phone}
+                          </span>
                         )}
                       </div>
 
@@ -1984,27 +2275,47 @@ const Membership = () => {
                         </label>
                         <input
                           type="text"
-                          className={`booking-form-input ${bookingRequestErrors.emiratesId ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.emiratesId ? "error" : ""
+                          }`}
                           placeholder="784-xxxx-xxxxxxx-x"
                           value={bookingRequest.emiratesId}
-                          onChange={(e) => setBookingRequest({...bookingRequest, emiratesId: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              emiratesId: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.emiratesId && (
-                          <span className="error-message">{bookingRequestErrors.emiratesId}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.emiratesId}
+                          </span>
                         )}
                       </div>
 
                       <div className="booking-form-field">
-                        <label className="booking-form-label">Time <span className="required-asterisk">*</span></label>
+                        <label className="booking-form-label">
+                          Time <span className="required-asterisk">*</span>
+                        </label>
                         <input
                           type="text"
-                          className={`booking-form-input ${bookingRequestErrors.time ? "error" : ""}`}
+                          className={`booking-form-input ${
+                            bookingRequestErrors.time ? "error" : ""
+                          }`}
                           placeholder="Select Time"
                           value={bookingRequest.time}
-                          onChange={(e) => setBookingRequest({...bookingRequest, time: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              time: e.target.value,
+                            })
+                          }
                         />
                         {bookingRequestErrors.time && (
-                          <span className="error-message">{bookingRequestErrors.time}</span>
+                          <span className="error-message">
+                            {bookingRequestErrors.time}
+                          </span>
                         )}
                       </div>
 
@@ -2017,7 +2328,12 @@ const Membership = () => {
                           placeholder="Enter Text"
                           rows="4"
                           value={bookingRequest.specialRequests}
-                          onChange={(e) => setBookingRequest({...bookingRequest, specialRequests: e.target.value})}
+                          onChange={(e) =>
+                            setBookingRequest({
+                              ...bookingRequest,
+                              specialRequests: e.target.value,
+                            })
+                          }
                         ></textarea>
                       </div>
                     </div>
@@ -2040,11 +2356,8 @@ const Membership = () => {
             </div>
           ) : currentView === "experienceDetail" ? (
             <div className="experience-detail-view">
-              {/* Hero Section */}
               <div className="experience-hero-section">
                 <div className="experience-hero-bg"></div>
-
-                {/* Information Card Overlay */}
                 <div className="experience-info-card">
                   <h1 className="experience-info-title">
                     Enjoy Birthday Party for group of 10
@@ -2066,51 +2379,49 @@ const Membership = () => {
                     voluptate velit esse quam nihil molestiae consequatur, vel
                     illum qui dolorem eum fugiat quo voluptas nulla pariatur?
                   </p>
-
                   <div className="experience-details">
                     <div className="experience-detail-item">
-                      <img src={ yartShipImg } className="enjoyYart" alt="" />
                       <div className="experience-detail-text">
-                        <span className="experience-detail-label">Boat</span>
+                        <img
+                          src={yartShipImg}
+                          className="experience-detail-icon-img"
+                          alt="Boat"
+                        />
+                      </div>
+                      <div className="experience-detail-text">
+                      <span className="experience-detail-label">Boat</span>
                         <span className="experience-detail-sub">
                           Subject to availability
                         </span>
                       </div>
                     </div>
                     <div className="experience-detail-item">
-                      <img src={ passengerImg } className="passengerImg" alt="" />
                       <div className="experience-detail-text">
-                        <span className="experience-detail-label">10</span>
+                      <img
+                        src={passengerImg}
+                        className="experience-detail-icon-img"
+                        alt="Passengers"
+                      />
+                      </div>
+                      
+                      <div className="experience-detail-text">
+                      <span className="experience-detail-label">10</span>
                         <span className="experience-detail-sub">
                           Max Passengers
                         </span>
                       </div>
                     </div>
                   </div>
-
-                  <div className="w-100 d-flex justify-content-center align-items-center">
-                  <button
-                    type="button"
-                    className="experience-book-btn"
-                    onClick={() => setCurrentView("bookingRequest")}
-                  >
-                    Book Experience
-                  </button>
+                  <div className="experience-book-btn-wrapper">
+                    <button
+                      type="button"
+                      className="experience-book-btn"
+                      onClick={() => setCurrentView("bookingRequest")}
+                    >
+                      Book Experience
+                    </button>
                   </div>
                 </div>
-
-                {/* Thumbnail Images */}
-                {/* <div className="experience-thumbnails">
-                  <div className="experience-thumbnail">
-                    <img src={boatCard1} alt="Bedroom" />
-                  </div>
-                  <div className="experience-thumbnail">
-                    <img src={boatCard2} alt="Kitchen" />
-                  </div>
-                  <div className="experience-thumbnail">
-                    <img src={boatCard3} alt="Lounge" />
-                  </div>
-                </div> */}
               </div>
             </div>
           ) : (
@@ -2254,7 +2565,11 @@ const Membership = () => {
             </button>
             <div className="success-icon">
               <div className="success-icon-circle">
-                <Lottie animationData={successLottie} loop={false} style={{ width: '142px', height: '142px' }} />
+                <Lottie
+                  animationData={successLottie}
+                  loop={false}
+                  style={{ width: "142px", height: "142px" }}
+                />
               </div>
             </div>
             <h3 className="success-title">Successful!</h3>
@@ -2293,7 +2608,11 @@ const Membership = () => {
             </button>
             <div className="success-icon">
               <div className="success-icon-circle">
-                <Lottie animationData={successLottie} loop={false} style={{ width: '142px', height: '142px' }} />
+                <Lottie
+                  animationData={successLottie}
+                  loop={false}
+                  style={{ width: "142px", height: "142px" }}
+                />
               </div>
             </div>
             <h3 className="success-title">Payment Successful</h3>
@@ -2303,7 +2622,7 @@ const Membership = () => {
               <div className="success-detail-value">
                 Dec 31, 2025 – 10 AM – 12 PM
               </div>
-              <div className="success-detail-ref">Payment Ref #:3265</div>
+              <div className="success-detail-ref">Payment Registration: NYB-0040</div>
             </div>
             <div className="success-actions">
               <button
@@ -2341,7 +2660,11 @@ const Membership = () => {
             </button>
             <div className="success-icon">
               <div className="success-icon-circle">
-                <Lottie animationData={successLottie} loop={false} style={{ width: '142px', height: '142px' }} />
+                <Lottie
+                  animationData={successLottie}
+                  loop={false}
+                  style={{ width: "142px", height: "142px" }}
+                />
               </div>
             </div>
             <h3 className="success-title">Successful</h3>
@@ -2435,7 +2758,11 @@ const Membership = () => {
             </button>
             <div className="booking-success-icon">
               <div className="booking-success-icon-circle">
-                <Lottie animationData={successLottie} loop={false} style={{ width: '142px', height: '142px' }} />
+                <Lottie
+                  animationData={successLottie}
+                  loop={false}
+                  style={{ width: "142px", height: "142px" }}
+                />
               </div>
             </div>
             <h3 className="booking-success-title">Submitted Successful!</h3>
