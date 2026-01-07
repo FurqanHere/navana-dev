@@ -8,7 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const leftLinks = [
   { name: "Home", path: "home", type: "section" },
-  { name: "About Us", path: "aboutus", type: "section" },
+  { name: "About Us", path: "/about-us", type: "route" },
   { name: "Boats", path: "features", type: "section" },
 ];
 
@@ -18,7 +18,7 @@ const rightLinks = [
   { name: "Contacts", path: "contacts", type: "section" },
 ];
 
-export default function Navbar({ background = "" }) {
+export default function Navbar({ background = "", profile = null }) {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,29 +48,38 @@ export default function Navbar({ background = "" }) {
     <>
       <nav className={`navbar-custom ${background} ${isScrolled ? 'navbar-fixed' : ''}`}>
         <div className="navbar-container">
-          {/* Left Navigation Links */}
-          <div className="navbar-left">
-            {leftLinks.map((link) => (
-              link.type === "route" ? (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                  onClick={() => setActiveLink(link.path)}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <Link
-                  key={link.path}
-                  to={`/#${link.path}`}
-                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                  onClick={() => setActiveLink(link.path)}
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
+          {/* Left Group */}
+          <div className="d-flex align-items-center justify-content-start w-100">
+            {profile && (
+              <div className="navbar-profile-section me-2">
+                {profile}
+              </div>
+            )}
+            
+            {/* Left Navigation Links */}
+            <div className="navbar-left flex-grow-1">
+              {leftLinks.map((link) => (
+                link.type === "route" ? (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    onClick={() => setActiveLink(link.path)}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={`/#${link.path}`}
+                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    onClick={() => setActiveLink(link.path)}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+            </div>
           </div>
 
           {/* Center Logo */}
@@ -82,29 +91,38 @@ export default function Navbar({ background = "" }) {
             />
           </Link>
 
-          {/* Right Navigation Links */}
-          <div className="navbar-right">
-            {rightLinks.map((link) => (
-              link.type === "route" ? (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                  onClick={() => setActiveLink(link.path)}
-                >
-                  {link.name}
-                </Link>
-              ) : (
-                <Link
-                  key={link.path}
-                  to={`/#${link.path}`}
-                  className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
-                  onClick={() => setActiveLink(link.path)}
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
+          {/* Right Group */}
+          <div className="d-flex align-items-center justify-content-end w-100">
+            {/* Right Navigation Links */}
+            <div className="navbar-right flex-grow-1">
+              {rightLinks.map((link) => (
+                link.type === "route" ? (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    onClick={() => setActiveLink(link.path)}
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <Link
+                    key={link.path}
+                    to={`/#${link.path}`}
+                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    onClick={() => setActiveLink(link.path)}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+            </div>
+            
+            {profile && (
+              <div className="navbar-bell ms-3 d-none d-lg-flex align-items-center justify-content-center">
+                <i className="bi bi-bell-fill" style={{ fontSize: '1.2rem', color: '#fff', cursor: 'pointer' }}></i>
+              </div>
+            )}
           </div>
 
           {/* Mobile Toggle Button */}

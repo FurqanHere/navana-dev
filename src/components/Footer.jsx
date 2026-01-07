@@ -10,15 +10,15 @@ import whatsAppIcon from "../assets/images/whatsApp.png";
 const Footer = () => {
   return (
     <section
-      className="cta-footer"
-      style={{
-        backgroundImage: `url(${footerImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      // className="cta-footer"
+      // style={{
+      //   backgroundImage: `url(${footerImg})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      // }}
     >
-      <div className="cta-footer-grid">
+      {/* <div className="cta-footer-grid">
         <div className="cta-column">
           <h4>Help Desk</h4>
           <p className="cta-copy">
@@ -75,7 +75,7 @@ const Footer = () => {
             <img src={tiktokIcon} className="tiktok" alt="TikTok" />
           </a>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

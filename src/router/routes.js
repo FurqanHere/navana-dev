@@ -10,6 +10,8 @@ import Become_a_Partner from "../pages/Become-a-Partner";
 import Login from "../pages/Login";
 import CreateAccount from "../pages/CreateAccount";
 import Membership from "../pages/Membership";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import AboutUs from "../pages/AboutUs";
 
 const AppRouter = () => {
     const basePath = process.env.REACT_APP_BASE_PATH;
@@ -27,6 +29,8 @@ const AppRouter = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<CreateAccount />} />
           <Route path="/membership" element={<Membership />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </Router>
     );
