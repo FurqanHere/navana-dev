@@ -5,14 +5,18 @@ import logo from "../assets/images/logo.png";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const leftLinks = [
   { name: "Home", path: "home", type: "section" },
   { name: "About Us", path: "/about-us", type: "route" },
   { name: "Boats", path: "features", type: "section" },
+  { name: "Experience", path: "features", type: "section" },
 ];
 
 const rightLinks = [
+  { name: "Fleet", path: "/membership", type: "route" },
   { name: "Membership", path: "/membership", type: "route" },
   { name: "Location", path: "location", type: "section" },
   { name: "Contacts", path: "contacts", type: "section" },
@@ -43,13 +47,17 @@ export default function Navbar({ background = "", profile = null }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true, offset: 80, easing: "ease-out" });
+  }, []);
 
   return (
     <>
-      <nav className={`navbar-custom ${background} ${isScrolled ? 'navbar-fixed' : ''}`}>
+      <nav className={`navbar-custom ${background} ${isScrolled ? 'navbar-fixed' : ''}`} data-aos="fade-down">
         <div className="navbar-container">
           {/* Left Group */}
-          <div className="d-flex align-items-center justify-content-start w-100">
+          <div className="d-flex align-items-center justify-content-start w-100" data-aos="fade-right">
             {profile && (
               <div className="navbar-profile-section me-2">
                 {profile}
@@ -63,7 +71,7 @@ export default function Navbar({ background = "", profile = null }) {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    className={`navbar-link hover-text ${activeLink === link.path ? "active" : ""}`}
                     onClick={() => setActiveLink(link.path)}
                   >
                     {link.name}
@@ -72,7 +80,7 @@ export default function Navbar({ background = "", profile = null }) {
                   <Link
                     key={link.path}
                     to={`/#${link.path}`}
-                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    className={`navbar-link hover-text ${activeLink === link.path ? "active" : ""}`}
                     onClick={() => setActiveLink(link.path)}
                   >
                     {link.name}
@@ -83,7 +91,7 @@ export default function Navbar({ background = "", profile = null }) {
           </div>
 
           {/* Center Logo */}
-          <Link className="navbar-logo-container" to="/">
+          <Link className="navbar-logo-container hoverable" to="/" data-aos="zoom-in">
             <img 
               src={logo} 
               alt="Nirvana Yachts & Boats" 
@@ -92,7 +100,7 @@ export default function Navbar({ background = "", profile = null }) {
           </Link>
 
           {/* Right Group */}
-          <div className="d-flex align-items-center justify-content-end w-100">
+          <div className="d-flex align-items-center justify-content-end w-100" data-aos="fade-left">
             {/* Right Navigation Links */}
             <div className="navbar-right flex-grow-1">
               {rightLinks.map((link) => (
@@ -100,7 +108,7 @@ export default function Navbar({ background = "", profile = null }) {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    className={`navbar-link hover-text ${activeLink === link.path ? "active" : ""}`}
                     onClick={() => setActiveLink(link.path)}
                   >
                     {link.name}
@@ -109,7 +117,7 @@ export default function Navbar({ background = "", profile = null }) {
                   <Link
                     key={link.path}
                     to={`/#${link.path}`}
-                    className={`navbar-link ${activeLink === link.path ? "active" : ""}`}
+                    className={`navbar-link hover-text ${activeLink === link.path ? "active" : ""}`}
                     onClick={() => setActiveLink(link.path)}
                   >
                     {link.name}
@@ -119,7 +127,7 @@ export default function Navbar({ background = "", profile = null }) {
             </div>
             
             {profile && (
-              <div className="navbar-bell ms-3 d-none d-lg-flex align-items-center justify-content-center">
+              <div className="navbar-bell ms-3 d-none d-lg-flex align-items-center justify-content-center hoverable">
                 <i className="bi bi-bell-fill" style={{ fontSize: '1.2rem', color: '#fff', cursor: 'pointer' }}></i>
               </div>
             )}
@@ -127,7 +135,7 @@ export default function Navbar({ background = "", profile = null }) {
 
           {/* Mobile Toggle Button */}
           <button
-            className="navbar-toggle d-lg-none"
+            className="navbar-toggle d-lg-none btn-hover"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar"
@@ -148,11 +156,11 @@ export default function Navbar({ background = "", profile = null }) {
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title mb-0 d-flex flex-column">
-            <img src={logo} alt="Logo" className="logo" />
+            <img src={logo} alt="Logo" className="logo hoverable" />
           </h5>
           <button
             type="button"
-            className="btn-close btn-close-white"
+            className="btn-close btn-close-white btn-hover"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           />
@@ -169,7 +177,7 @@ export default function Navbar({ background = "", profile = null }) {
                   <Link
                     style={{ fontSize: "1.125rem" }}
                     to={link.path}
-                    className={`nav-link ${
+                    className={`nav-link hover-text ${
                       activeLink === link.path ? "active" : ""
                     }`}
                     onClick={() => setActiveLink(link.path)}
@@ -184,7 +192,7 @@ export default function Navbar({ background = "", profile = null }) {
                     smooth
                     duration={200}
                     spy
-                    className={`nav-link ${
+                    className={`nav-link hover-text ${
                       activeLink === link.path ? "active" : ""
                     }`}
                     onClick={() => setActiveLink(link.path)}

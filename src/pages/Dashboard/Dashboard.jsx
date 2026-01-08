@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import bdShipImg from "../../assets/images/bs-ship.png";
 import bookingShips from "../../assets/images/bookingShips.png";
 import whiteBlueShip from "../../assets/images/white-blue-ship.png";
+import blueShip from "../../assets/images/blue-ship.png";
 import blueThumbsUp from "../../assets/images/blueThumbsUp.png";
 import profilePic from "../../assets/images/profile-pic.png";
 
@@ -70,7 +71,7 @@ export default function Dashboard() {
                       className={`bookings-type-btn ${selectedTab === "bookings" ? "active" : ""}`}
                       onClick={() => setSelectedTab("bookings")}
                     >
-                      <img src={whiteBlueShip} className="bookings-type-btn-img icon-white" alt="" />
+                      <img src={blueShip} className="bookings-type-btn-img icon-white" alt="" />
                       <span>Bookings</span>
                     </button>
                     <button
