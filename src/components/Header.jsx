@@ -12,12 +12,12 @@ const leftLinks = [
   { name: "Home", path: "home", type: "section" },
   { name: "About Us", path: "/about-us", type: "route" },
   { name: "Boats", path: "features", type: "section" },
-  { name: "Experience", path: "features", type: "section" },
+  { name: "Experiences", path: "experiences", type: "section" },
 ];
 
 const rightLinks = [
-  { name: "Fleet", path: "/membership", type: "route" },
-  { name: "Membership", path: "/membership", type: "route" },
+  { name: "Calma", path: "/calma", type: "route" },
+  { name: "Membership", path: "/member-ship", type: "route" },
   { name: "Location", path: "location", type: "section" },
   { name: "Contacts", path: "contacts", type: "section" },
 ];
@@ -29,8 +29,8 @@ export default function Navbar({ background = "", profile = null }) {
 
   useEffect(() => {
     // Set active link based on current route
-    if (location.pathname === "/membership") {
-      setActiveLink("/membership");
+    if (location.pathname === "/member-ship") {
+      setActiveLink("/member-ship");
     } else if (location.pathname === "/") {
       setActiveLink("home");
     } else {

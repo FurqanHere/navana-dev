@@ -24,9 +24,16 @@ import yellowStar from "../assets/images/yellow-star.png";
 import whiteStar from "../assets/images/white-star.png";
 
 import appBg from "../assets/images/app-bg-img.png";
-import appSS1 from "../assets/images/app-ss1.png";
-import appSS2 from "../assets/images/app-ss2.png";
-import appSS3 from "../assets/images/app-ss3.png";
+import appSS1 from "../assets/images/app-ss/app-ss1.png";
+import appSS2 from "../assets/images/app-ss/app-ss2.png";
+import appSS3 from "../assets/images/app-ss/app-ss3.png";
+import appSS4 from "../assets/images/app-ss/app-ss4.png";
+import appSS5 from "../assets/images/app-ss/app-ss5.png";
+import appSS6 from "../assets/images/app-ss/app-ss6.png";
+import appSS7 from "../assets/images/app-ss/app-ss7.png";
+import appSS8 from "../assets/images/app-ss/app-ss8.png";
+import appSS9 from "../assets/images/app-ss/app-ss9.png";
+import appSS10 from "../assets/images/app-ss/app-ss10.png";
 
 import scrollTopIcon from "../assets/images/arrow-up.png";
 import leftDecoPiece from "../assets/images/left-deco-piece.png";
@@ -292,13 +299,25 @@ const HomePage = () => {
                 <img src={appSS3} alt="App Screenshot 3" className="app-ss hoverable" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={appSS1} alt="App Screenshot 1" className="app-ss hoverable" />
+                <img src={appSS4} alt="App Screenshot 1" className="app-ss hoverable" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={appSS2} alt="App Screenshot 2" className="app-ss hoverable" />
+                <img src={appSS5} alt="App Screenshot 2" className="app-ss hoverable" />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={appSS3} alt="App Screenshot 3" className="app-ss hoverable" />
+                <img src={appSS6} alt="App Screenshot 3" className="app-ss hoverable" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={appSS7} alt="App Screenshot 3" className="app-ss hoverable" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={appSS8} alt="App Screenshot 3" className="app-ss hoverable" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={appSS9} alt="App Screenshot 3" className="app-ss hoverable" />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={appSS10} alt="App Screenshot 3" className="app-ss hoverable" />
               </SwiperSlide>
             </Swiper>
           </div>
