@@ -5,12 +5,12 @@ import Footer from "../components/Footer";
 import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  // const { t, i18n } = useTranslation();
+  // const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  // useEffect(() => {
+  // //   window.scrollTo(0, 0);
+  // // }, [pathname]);
   
   // useEffect(() => {
   //   const currentLang = i18n.language;
@@ -21,17 +21,16 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      {/* <div className="privacy-bg from-top">
         <Header background="bg-white" />
-      </div>
+      </div> */}
 
-      <div className="container mt-5">
+      {/* <div className="container mt-5">
         <div className="row">
           <div className="col-md-1"></div>
           <div className="col-md-7 d-flex flex-column justify-content-center">
             <div className="position-relative">
               <h2 className="fw-bold">Contact Gear</h2>
-              {/* <img src={yellow_line} className="yellow_line" /> */}
             </div>
 
             <p>Contact Gear by phone or email</p>
@@ -42,7 +41,6 @@ const PrivacyPolicy = () => {
           </div>
           <div className="col-md-4">
             <div style={{ width: "300px" }}>
-              {/* <img src={car_summer} className="w-100" /> */}
             </div>
           </div>
 
@@ -105,10 +103,10 @@ const PrivacyPolicy = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

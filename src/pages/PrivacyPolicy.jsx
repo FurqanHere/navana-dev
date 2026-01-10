@@ -5,12 +5,12 @@ import Footer from "../components/Footer";
 import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  // const { t, i18n } = useTranslation();
+  // const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [pathname]);
 
   // useEffect(() => {
   //   const currentLang = i18n.language;
@@ -21,15 +21,15 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      {/* <div className="privacy-bg from-top">
         <Header background="bg-white" />
 
         <div className="heading-policy flex-column">
           <h1>Privacy Policy</h1>
         </div>
-      </div>
+      </div> */}
 
-      <div className="container data-info">
+      {/* <div className="container data-info">
         <div className="text-center">
           <p>Effective Date: [June 17, 2025]</p>
           <p>
@@ -161,10 +161,10 @@ const PrivacyPolicy = () => {
           <p>Location: Dubai, United Arab Emirates</p>
           <span>Website:</span><a href="https://gearapp.ae"> https://gearapp.ae </a>
         </div>
-      </div>
+      </div> */}
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

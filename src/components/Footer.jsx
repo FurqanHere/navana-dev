@@ -1,83 +1,82 @@
 import React from "react";
-import footerImg from "../assets/images/footer-img.png";
-import callImg from "../assets/images/call-img.png";
-import fbIcon from "../assets/images/fb.png";
-import xIcon from "../assets/images/x.png";
-import instaIcon from "../assets/images/insta.png";
-import tiktokIcon from "../assets/images/tiktok.png";
-import whatsAppIcon from "../assets/images/whatsApp.png";
+import { Link } from "react-router-dom";
+import logo from "../assets/images/LandingPageLogo.png";
+import footerBg from "../assets/images/landingPageFooterBg.png";
+import wheel from "../assets/images/footer-wheel.png";
+import fb from "../assets/images/landingPagefb.png";
+import x from "../assets/images/landingPageX.png";
+import insta from "../assets/images/landingPageInstagram.png";
+import tiktok from "../assets/images/landingPageTikTok.png";
+import whatsApp from "../assets/images/landingPageWhatsApp.png";
+import callIcon from "../assets/images/landingPageCall.png";
+import emailIcon from "../assets/images/landingPageEmail.png";
+import locationIcon from "../assets/images/landingPageLocation.png";
+import footerWheel from "../assets/images/footer-wheel.png"
 
-const Footer = () => {
+export default function LandingPageFooter() {
   return (
-    <section
-      // className="cta-footer"
-      // style={{
-      //   backgroundImage: `url(${footerImg})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      //   backgroundRepeat: "no-repeat",
-      // }}
+    <footer
+      className="landing-footer position-relative"
+      style={{ backgroundImage: `url(${footerBg})` }}
     >
-      {/* <div className="cta-footer-grid">
-        <div className="cta-column">
-          <h4>Help Desk</h4>
-          <p className="cta-copy">
-            Do you have questions or want more information? Call now.
-          </p>
-          <a className="cta-phone" href="tel:+971542631798">
-            <img src={ callImg } className="call-img" alt="" /> +971 54 263 1798
-          </a>
-        </div>
+      <div className="container">
+        <div className="landing-footer-grid">
+          <div className="landing-footer-col" data-aos="fade-up">
+            <h4 className="landing-footer-title">Quick Links</h4>
+            <ul className="landing-footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about-us">About Us</Link></li>
+              <li><Link to="/membership">Membership</Link></li>
+              <li><a href="/#screenshots">Screenshots</a></li>
+              <li><a href="/#download">Download App</a></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            </ul>
+          </div>
 
-        <div className="cta-column links">
-          <div>
-            <a href="/">Home</a>
-            <a href="/#aboutus">About Us</a>
-            <a href="/#features">Boats</a>
-            <a href="/#membership">Memberships</a>
-            <a href="/#location">Locations</a>
-            <a href="/#contacts">Contact Us</a>
+          <div className="landing-footer-center" data-aos="fade-up" data-aos-delay="100">
+            <img src={logo} alt="" className="landing-footer-logo" />
+            <h3 className="landing-footer-heading">Your New Adventure Starts Here!</h3>
+            <p className="landing-footer-sub">
+              Bespoke services focused on luxury, safety, comfort, and sustainability
+            </p>
+            <div className="landing-footer-social" data-aos="zoom-in" data-aos-delay="200">
+              <button type="button" aria-label="Facebook"><img src={fb} alt="" /></button>
+              <button type="button" aria-label="X"><img src={x} alt="" /></button>
+              <button type="button" aria-label="WhatsApp"><img src={whatsApp} alt="" /></button>
+              <button type="button" aria-label="Instagram"><img src={insta} alt="" /></button>
+              <button type="button" aria-label="TikTok"><img src={tiktok} alt="" /></button>
+            </div>
+          </div>
+
+          <div className="landing-footer-col" data-aos="fade-up" data-aos-delay="150">
+            <h4 className="landing-footer-title">Company</h4>
+            <div className="landing-footer-contact">
+              <div className="landing-footer-contact-row">
+                <img src={callIcon} alt="" />
+                <span>+971 54 792 2842</span>
+              </div>
+              <div className="landing-footer-contact-row">
+                <img src={callIcon} alt="" />
+                <span>800MARINE</span>
+              </div>
+              <div className="landing-footer-contact-row">
+                <img src={emailIcon} alt="" />
+                <span>sales@nirvanayachts.ae</span>
+              </div>
+              <div className="landing-footer-contact-row">
+                <img src={locationIcon} alt="" />
+                <span>Abu Dhabi, UAE</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="cta-column links">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms &amp; Conditions</a>
-          <a href="/support">Support</a>
-          <a href="/download">Download App</a>
-        </div>
-
-        <div className="cta-column newsletter">
-          <h4>Sign up for newsletter and <br className="" /> get latest news &amp; update</h4>
-          <div className="newsletter-row">
-            <input type="email" placeholder="Your Email" />
-            <button type="button">Subscribe</button>
-          </div>
+        <div className="landing-footer-copy text-start">
+          Copyright © 2025 Nirvana, All rights reserved.
         </div>
       </div>
-
-      <div className="cta-footer-bottom">
-        <span className="copyright-text" >Copyright © {new Date().getFullYear()} Nirvana. All rights reserved.</span>
-        <div className="social-row">
-          <a href="https://facebook.com" aria-label="Facebook">
-            <img src={fbIcon} className="fb" alt="Facebook" />
-          </a>
-          <a href="https://x.com" aria-label="X">
-            <img src={xIcon} className="x" alt="X" />
-          </a>
-          <a href="https://x.com" aria-label="X">
-            <img src={whatsAppIcon} className="whatsApp" alt="X" />
-          </a>
-          <a href="https://instagram.com" aria-label="Instagram">
-            <img src={instaIcon} className="insta" alt="Instagram" />
-          </a>
-          <a href="https://tiktok.com" aria-label="TikTok">
-            <img src={tiktokIcon} className="tiktok" alt="TikTok" />
-          </a>
-        </div>
-      </div> */}
-    </section>
+      <div className="footerWheel">
+        <img src={footerWheel} alt="" />
+      </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

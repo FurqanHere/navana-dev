@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { useTranslation } from "react-i18next";
+// import React, { useEffect } from "react";
+// import { useLocation } from "react-router-dom";
+// import Header from "../components/Header";
+// import Footer from "../components/Footer";
+// import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy = () => {
-  const { t, i18n } = useTranslation();
-  const { pathname } = useLocation();
+  // const { t, i18n } = useTranslation();
+  // const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [pathname]);
 
   return (
     <>
-      <div className="from-top">
+      {/* <div className="from-top">
         <Header background="bg-white" />
 
         <div className="heading-policy flex-column">
@@ -195,7 +195,7 @@ const PrivacyPolicy = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

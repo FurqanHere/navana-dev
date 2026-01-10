@@ -13,61 +13,61 @@ import { Dropdown } from "primereact/dropdown";
 
 import ApiService from "../services/ApiService";
 
-const UAE_STATES = [
-  { label: "Abu Dhabi", value: "abu-dhabi" },
-  { label: "Dubai", value: "dubai" },
-  { label: "Sharjah", value: "sharjah" },
-  { label: "Ajman", value: "ajman" },
-  { label: "Umm Al Quwain", value: "umm-al-quwain" },
-  { label: "Ras Al Khaimah", value: "ras-al-khaimah" },
-  { label: "Fujairah", value: "fujairah" }
-];
+// const UAE_STATES = [
+//   { label: "Abu Dhabi", value: "abu-dhabi" },
+//   { label: "Dubai", value: "dubai" },
+//   { label: "Sharjah", value: "sharjah" },
+//   { label: "Ajman", value: "ajman" },
+//   { label: "Umm Al Quwain", value: "umm-al-quwain" },
+//   { label: "Ras Al Khaimah", value: "ras-al-khaimah" },
+//   { label: "Fujairah", value: "fujairah" }
+// ];
 
 const Partner = () => {
   // const { executeRecaptcha } = useGoogleReCaptcha();
-  const [isLoader, setIsLoader] = useState(false);
-  const [files, setFiles] = useState(null);
+  // const [isLoader, setIsLoader] = useState(false);
+  // const [files, setFiles] = useState(null);
   // const [recaptchaValue, setRecaptchaValue] = useState(null);
 
-  const [formData, setFormData] = useState({
-    owner_name: "",
-    email: "",
-    phone: "",
-    role: "",
-    contact_name: "",
-    business_email: "",
-    business_phone: "",
-    address: "",
-    type: "",
-    message: "",
-    emirate: "",
-    document: null,
-    trade_license: "No",
-    files: [],
-  });
+  // const [formData, setFormData] = useState({
+  //   owner_name: "",
+  //   email: "",
+  //   phone: "",
+  //   role: "",
+  //   contact_name: "",
+  //   business_email: "",
+  //   business_phone: "",
+  //   address: "",
+  //   type: "",
+  //   message: "",
+  //   emirate: "",
+  //   document: null,
+  //   trade_license: "No",
+  //   files: [],
+  // });
 
-  const emptyForm = () => {
-    setFormData({
-      owner_name: "",
-      email: "",
-      phone: "",
-      role: "",
-      contact_name: "",
-      business_email: "",
-      business_phone: "",
-      address: "",
-      type: "",
-      message: "",
-      emirate: "",
-      document: null,
-      trade_license: "",
-      files: [],
-    });
-    setFiles(null);
-  };
+  // const emptyForm = () => {
+  //   setFormData({
+  //     owner_name: "",
+  //     email: "",
+  //     phone: "",
+  //     role: "",
+  //     contact_name: "",
+  //     business_email: "",
+  //     business_phone: "",
+  //     address: "",
+  //     type: "",
+  //     message: "",
+  //     emirate: "",
+  //     document: null,
+  //     trade_license: "",
+  //     files: [],
+  //   });
+  //   setFiles(null);
+  // };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+    // e.preventDefault();
     
     // Validate reCAPTCHA
     // if (!recaptchaValue) {
@@ -85,91 +85,91 @@ const Partner = () => {
     //   return;
     // }
     
-    setIsLoader(true);
-    try {
-      const formDataToSend = new FormData();
+    // setIsLoader(true);
+    // try {
+    //   const formDataToSend = new FormData();
 
-      console.log(files);
+    //   console.log(files);
 
-      // Append regular fields
-      for (const key in formData) {
-        if (key !== "files") {
-          formDataToSend.append(key, formData[key]);
-        }
-      }
+    //   // Append regular fields
+    //   for (const key in formData) {
+    //     if (key !== "files") {
+    //       formDataToSend.append(key, formData[key]);
+    //     }
+    //   }
       
       // Append reCAPTCHA value
       // formDataToSend.append("recaptcha", recaptchaValue);
 
     
       // Append files from dropzone
-      if (files && files.length > 0) {
-        files.forEach((file) => {
-          formDataToSend.append("files[]", file);
-        });
-      } else {
-        formDataToSend.append("files[]", null);
-      }
+  //     if (files && files.length > 0) {
+  //       files.forEach((file) => {
+  //         formDataToSend.append("files[]", file);
+  //       });
+  //     } else {
+  //       formDataToSend.append("files[]", null);
+  //     }
 
-      const response = await ApiService.request({
-        method: "POST",
-        url: "/becomePartner",
-        data: formDataToSend,
-         headers: {
-           "Content-Type": "multipart/form-data",
-         },
-      });
+  //     const response = await ApiService.request({
+  //       method: "POST",
+  //       url: "/becomePartner",
+  //       data: formDataToSend,
+  //        headers: {
+  //          "Content-Type": "multipart/form-data",
+  //        },
+  //     });
      
 
-       console.log("Sending data:", formDataToSend);
-       console.log("Received response:", response.data);
+  //      console.log("Sending data:", formDataToSend);
+  //      console.log("Received response:", response.data);
 
-       if (response.data.status) {
-        console.log("API response:", response.data);
-         Swal.fire({
-           icon: "success",
-           title: "Form Submitted!",
-           text: response.data.message,
-           confirmButtonText: "OK",
-           confirmButtonColor: "#3F85DE",
-           confirmButtonAriaLabel: "OK",
-           customClass: {
-             confirmButton: "swal-confirm-btn"
-           }
-         });
-        emptyForm();
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error Occurred!",
-          text: "Unable to submit contact query. Write email manually to support@lastorder.com",
-          confirmButtonText: "OK",
-          confirmButtonColor: "#3F85DE",
-          confirmButtonAriaLabel: "OK",
-          customClass: {
-            confirmButton: "swal-confirm-btn"
-          }
-        });
-        toast.error(response.data.message);
-       }
-    } catch (error) {
-      console.error("Form submission failed:", error);
-    } finally {
-      setIsLoader(false);
-    }
-  };
+  //      if (response.data.status) {
+  //       console.log("API response:", response.data);
+  //        Swal.fire({
+  //          icon: "success",
+  //          title: "Form Submitted!",
+  //          text: response.data.message,
+  //          confirmButtonText: "OK",
+  //          confirmButtonColor: "#3F85DE",
+  //          confirmButtonAriaLabel: "OK",
+  //          customClass: {
+  //            confirmButton: "swal-confirm-btn"
+  //          }
+  //        });
+  //       emptyForm();
+  //     } else {
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Error Occurred!",
+  //         text: "Unable to submit contact query. Write email manually to support@lastorder.com",
+  //         confirmButtonText: "OK",
+  //         confirmButtonColor: "#3F85DE",
+  //         confirmButtonAriaLabel: "OK",
+  //         customClass: {
+  //           confirmButton: "swal-confirm-btn"
+  //         }
+  //       });
+  //       toast.error(response.data.message);
+  //      }
+  //   } catch (error) {
+  //     console.error("Form submission failed:", error);
+  //   } finally {
+  //     setIsLoader(false);
+  //   }
+  // };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      {/* <div className="privacy-bg from-top">
         <Header background="bg-white" />
         <div className="heading-policy text-center py-5">
           <h1>Become a Partner</h1>
@@ -306,10 +306,10 @@ const Partner = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

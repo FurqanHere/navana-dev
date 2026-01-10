@@ -7,12 +7,8 @@ import CancellationPolicy from "../pages/CancellationPolicy";
 import Support from "../pages/Support";
 import ContactUs from "../pages/ContactUs";
 import Become_a_Partner from "../pages/Become-a-Partner";
-import Login from "../pages/Login";
-import CreateAccount from "../pages/CreateAccount";
+import Aboutus from "../pages/AboutUs";
 import Membership from "../pages/Membership";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import LandingPageAboutus from "../pages/LandingPageAboutus";
-import LandingPageMembership from "../pages/LandingPageMembership";
 
 const AppRouter = () => {
     const basePath = process.env.REACT_APP_BASE_PATH;
@@ -27,12 +23,8 @@ const AppRouter = () => {
           <Route path="/become-a-partner" element={<Become_a_Partner />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<CreateAccount />} />
-          <Route path="/membership" element={<Membership />} />
-          <Route path="/member-ship" element={<LandingPageMembership />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about-us" element={<LandingPageAboutus />} />
+          <Route path="/member-ship" element={<Membership />} />
+          <Route path="/about-us" element={<Aboutus />} />
         </Routes>
       </Router>
     );

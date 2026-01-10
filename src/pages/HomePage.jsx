@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LandingPageHeader from "../components/Header";
-import LandingPageFooter from "../components/LandingPageFooter";
+import LandingPageFooter from "../components/Footer";
 import wheels from "../assets/images/wheel-img.png";
 
 import leftBlueDeco from "../assets/images/left-blue-deco-img.png";

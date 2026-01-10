@@ -1365,7 +1365,7 @@ body {
 }
 
 .navbar-link:hover {
-  color: #f0d7a0;
+  color: #f0d7a0 !important;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -4203,13 +4203,6 @@ html {
   background-size: 16px 16px;
 }
 
-.schedule-slot-check.selected {
-  border-color: #0170d3;
-  background-color: #0170d3;
-  background-image: url("../images/bg-blue-tick.png");
-  box-shadow: 0 0 0 3px rgba(1, 112, 211, 0.18);
-}
-
 .schedule-submit-wrap {
   display: flex;
   justify-content: center;
@@ -4841,15 +4834,6 @@ html {
   display: grid;
   grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 10px;
-}
-
-.final-row .border-bottom {
-  border-bottom: none !important;
-  background-image: url("../images/Line.png");
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100% auto;
-  padding-bottom: 12px;
 }
 
 .final-row.status-row {
@@ -6588,16 +6572,6 @@ html {
 .user-profile-right {
   display: flex;
   flex-direction: column;
-}
-
-.user-membership-card {
-  width: 890px;
-  height: 114px;
-  background: url("../../assets/images/bg-sky-blue.png") no-repeat center center;
-  border-radius: 16px;
-  padding: 28px 32px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  height: fit-content;
 }
 
 .membership-card-content {
@@ -8466,14 +8440,6 @@ html {
 /* Dashboard Page */
 .dashboard-page {
   color: #ffffff;
-}
-
-.dashboard-section {
-  padding-top: 110px;
-  padding-bottom: 60px;
-  background: url(../images/membership-bg-img.png) no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 .dashboard-layout {
